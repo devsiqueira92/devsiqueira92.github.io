@@ -1,0 +1,37 @@
+<form class="form" [formGroup]="parentForm">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffix" class="did-floating-label-content">
+          <input
+            class="form-control did-floating-input"
+            [autocomplete]="autocomplete"
+            [ngClass]="{
+              warning:
+                displayWarning(
+                  parentForm.controls[controlName],
+                  isSubmitting$ | async
+                ) === FormValidationStatus.warning
+            }"
+            [type]="type === 'text' || passwordVisible ? 'text' : 'password'"
+            nz-input
+            [formControlName]="controlName"
+            placeholder=" "
+            (change)="valueChanged()"
+          />
+  
+          <label class="did-floating-label">{{ placeholder }}</label>
+        </nz-input-group>
+  
+        <ng-template #suffix>
+          <i
+            *ngIf="type === 'password'"
+            nz-icon
+            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"
+          ></i>
+        </ng-template>
+      </nz-form-control>
+      <ng-content></ng-content>
+    </nz-form-item>
+  </form>
+  

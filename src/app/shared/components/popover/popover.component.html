@@ -1,0 +1,11 @@
+
+<li nz-popover [nzPopoverContent]="popover">    
+    <nz-badge nzStatus="success" [nzText]="'Paciente: '+item.patient.name"></nz-badge>
+</li>
+
+<ng-template #popover>
+    <div>Paciente: {{item.patient.name}}</div>
+    <div>Fisioterapeuta: {{item.doctor}}</div>
+
+    <button (click)="editAppointment()">Edit</button>
+</ng-template>

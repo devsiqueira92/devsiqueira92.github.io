@@ -1,0 +1,59 @@
+
+<nz-layout>
+    <nz-sider class="menu-sidebar"
+    nzCollapsible 
+    nzWidth="200px"
+    nzBreakpoint="lg"
+    
+    >
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Physio</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+
+      <li nz-menu-item routerLink="/home" nzMatchRouter>
+        <span nz-icon nzType="home"></span>
+        <span>Home</span>
+      </li>
+
+      
+
+      <li [appShowIfLogged]="true" nz-menu-item routerLink="/appointments" nzMatchRouter>
+        <span nz-icon nzType="calendar" nzTheme="outline"></span>
+        <span>Appointments</span>
+      </li>
+
+      
+      <li [appShowIfLogged]="true" nz-submenu nzTitle="Management" nzIcon="setting">
+        <ul>
+          <li nz-menu-item routerLink="/patients" nzMatchRouter>
+            <span nz-icon nzType="contacts" nzTheme="outline"></span>
+            <span>Patients</span>
+          </li>
+
+          <li nz-menu-item routerLink="/physioterapists" nzMatchRouter>
+            <span nz-icon nzType="team" nzTheme="outline"></span>
+            <span >Physioterapists</span>
+          </li>
+
+          <li nz-menu-item routerLink="/procedures" nzMatchRouter>
+            <span nz-icon nzType="exclamation-circle" nzTheme="outline"></span>
+            <span >Procedures</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <app-header></app-header>
+    </nz-header>
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+   <app-footer></app-footer>
+  </nz-layout>
+</nz-layout>

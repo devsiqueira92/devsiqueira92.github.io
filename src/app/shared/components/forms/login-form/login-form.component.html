@@ -1,0 +1,24 @@
+<form id="login-form" [formGroup]="formGroup">
+    <div class="mt-2">
+      <app-login-input
+      [control]="formGroup.controls.email"
+      [placeholder]="'Username'"
+      type="text"
+      aria-input-field-name="Login input"
+    ></app-login-input>
+    </div>
+    <div class="mt-2">
+      <app-login-input
+        [control]="formGroup.controls.password"
+        [placeholder]="'Password'"
+        type="password"
+        aria-input-field-name="Password input"
+      ></app-login-input>
+    </div>
+    <app-button (click)="loginInputSubmit.emit(formGroup)" label="Login"> </app-button>
+    
+    <!-- <div class="space-between-row">
+      <label nz-checkbox formControlName="rememberMe">{{ "RememberMe" }}</label>
+    </div> -->
+  </form>
+  

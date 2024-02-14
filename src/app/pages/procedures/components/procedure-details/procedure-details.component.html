@@ -1,0 +1,37 @@
+
+<form nz-form [formGroup]="formGroup">
+    <app-input
+    *ngIf="mode === 'edit'"
+    [placeholder]="'Id'"
+    controlName="id"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-input>
+  
+  <app-input
+      [placeholder]="'Name'"
+      controlName="name"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+    
+    <app-input
+      [placeholder]="'Membro'"
+      controlName="member"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+  
+    <app-input
+      [placeholder]="'Passo'"
+      controlName="steps"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+  
+ 
+  
+    <app-button label="Adicionar" icon="plus" (click)="submit()"></app-button>
+  </form>
+  
+  

@@ -1,0 +1,22 @@
+<div class="app-header">
+    <app-button [appShowIfLogged]="false"  [appModalTrigger]="ModalTriggerActionEnum.Auth" label="Login" icon="login"></app-button>
+    <app-link-button [appShowIfLogged]="false"  label="Register" path="register" icon="plus" ></app-link-button>
+
+    <!-- <app-button [appShowIfLogged]="true" label="Logout" icon="poweroff" type="secondary" (click)="logout()"></app-button> -->
+    
+    <span nz-popover 
+    class="controls-button"
+    nzPopoverContent="Meus Dados" 
+    nzPopoverPlacement="left" 
+    [appShowIfLogged]="true" 
+    nz-icon nzType="user" 
+    nzTheme="outline" routerLink="/account" routerLinkActive="router-active" ></span>
+
+    <span nz-popover 
+    nzPopoverContent="Sair" 
+    nzPopoverPlacement="left" 
+    class="controls-button" 
+    [appShowIfLogged]="true" 
+    nz-icon nzType="poweroff" 
+    nzTheme="outline" (click)="logout()"></span>
+</div>

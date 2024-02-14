@@ -1,0 +1,8 @@
+<h2>Login</h2>
+<div class="modal-container" [ngSwitch]="currentStep$ | async">
+  <app-login-form
+    *ngSwitchCase="AuthStep.Login"
+    (loginInputSubmit)="onLoginInputSubmit($event)"
+  >
+  </app-login-form>
+</div>

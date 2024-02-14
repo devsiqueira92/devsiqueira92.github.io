@@ -1,0 +1,22 @@
+<nz-form-item>
+    <nz-form-control>
+      <nz-input-group [nzSuffix]="suffix" class="login-input">
+        <input
+          [autocomplete]="autocomplete"
+          nz-input
+          [placeholder]="placeholder"
+          [type]="type === 'text' || passwordVisible ? 'text' : 'password'"
+          [formControl]="control"
+        />
+      </nz-input-group>
+      <ng-template #suffix>
+        <i
+          *ngIf="type === 'password'"
+          nz-icon
+          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+          (click)="passwordVisible = !passwordVisible"
+        ></i>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  

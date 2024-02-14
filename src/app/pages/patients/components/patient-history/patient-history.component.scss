@@ -1,0 +1,18 @@
+:host {
+
+    p, h3 {
+        margin: 0;
+    }
+    .procedure-wrapper {
+        margin-bottom: 1rem;
+    }
+    .procedure-info {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+       
+        span {
+            margin-right: 0.5rem;
+        }
+    }
+}

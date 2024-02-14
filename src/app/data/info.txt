@@ -1,0 +1,19 @@
+Fluxo:
+Registrar minha clinica
+Após registo da clinica, criar um fisioterapeuta para atender os pacientes;
+
+Criar procedimentos de sessao
+Cada agendamento vai ter uma data, um paciente, um fisioterapeuta e um tipo de procedimento
+
+Programar o upload button
+
+
+criar uma página de login e ao aceder a aplicação, abri-la inicialmente se não estiver autenticado. 
+Caso autenticado, ir pra agendamentos
+
+
+Historico do paciente
+Buscar todas as consultas do paciente 1 e os procedimentos realizados
+
+nomear procedimento para protocolo ***
+

@@ -1,0 +1,16 @@
+:host{
+
+    .cta {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .uploader-wrapper {
+        margin-bottom: 1.5rem;
+        
+        .uploader {
+            display: block;
+            height: 100%;
+        }
+    }
+}

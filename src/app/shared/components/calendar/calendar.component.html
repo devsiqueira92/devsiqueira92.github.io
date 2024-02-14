@@ -1,0 +1,23 @@
+<!-- <nz-calendar (nzPanelChange)="panelChange($event)"(nzSelectChange)="selectChange($event)">
+    <ul *nzDateCell="let date" class="events">
+       <ng-container *ngFor="let event of events; trackBy:getEvents">
+          <app-popover *ngIf="displayEvent(event, date)" [item]="event"></app-popover>
+       </ng-container>
+    </ul>
+    <ul *nzMonthCell="let month" class="events">
+       <ng-container *ngFor="let event of getMonthEvents(month)">
+        <app-popover [item]="event"></app-popover>
+       </ng-container>
+    </ul>
+  </nz-calendar> -->
+
+
+<nz-calendar (nzPanelChange)="panelChange($event)"(nzSelectChange)="selectChange($event)" [nzFullscreen]="false">
+   <ul *nzDateFullCell="let date" class="events" 
+   [ngClass]="{
+      active: hasEvent(date).length > 0 && hasEvent(date).length < 2,
+      full: hasEvent(date).length > 1 
+   }">
+      <span>{{ date.getDate() }}</span>
+   </ul>
+ </nz-calendar>
