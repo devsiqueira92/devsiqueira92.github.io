@@ -44,7 +44,6 @@ export class SchedulingService {
 
   add(scheduling: any) {
     let schedulingAdded = { scheduling };
-    debugger;
 
     schedulingAdded.scheduling.patient = {
       id: '1',
@@ -64,6 +63,7 @@ export class SchedulingService {
     //   name: 'João',
     // };
     schedulingAdded.scheduling.id = (this.scheduling.length + 1).toString();
+    schedulingAdded.scheduling.status = { id: '1', name: 'Agendado' };
 
     this.scheduling.push(schedulingAdded.scheduling);
   }

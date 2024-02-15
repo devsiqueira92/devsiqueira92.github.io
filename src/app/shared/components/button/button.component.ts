@@ -8,10 +8,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   standalone: true,
   imports: [NzButtonModule, NzIconModule, NgIf],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
   @Input() label: string;
   @Input() type: string = 'primary';
   @Input() icon: string;
+  @Input() disabled: boolean = false;
 }

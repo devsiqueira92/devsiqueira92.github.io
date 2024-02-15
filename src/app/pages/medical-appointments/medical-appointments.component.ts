@@ -6,6 +6,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { MedicalAppointmentService } from './services/medical-appointment.service';
+import { SchedulingService } from '../scheduling/services/scheduling.service';
 
 @Component({
   standalone: true,
@@ -22,9 +23,12 @@ import { MedicalAppointmentService } from './services/medical-appointment.servic
 export class MedicalAppointmentsComponent implements OnInit {
   listOfData$: Observable<any>;
 
-  constructor(private medicalAppointmentService: MedicalAppointmentService) {}
+  constructor(
+    private medicalAppointmentService: MedicalAppointmentService,
+    private schedulingService: SchedulingService
+  ) {}
 
   ngOnInit(): void {
-    this.listOfData$ = this.medicalAppointmentService.getList();
+    this.listOfData$ = this.schedulingService.getList();
   }
 }

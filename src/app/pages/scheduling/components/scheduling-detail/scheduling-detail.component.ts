@@ -28,6 +28,7 @@ import { SelectComponent } from '@app/shared/components/forms/select/select.comp
 import { SwitchComponent } from '@app/shared/components/forms/switch/switch.component';
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 import { TimePickerComponent } from '@app/shared/components/forms/time-picker/time-picker.component';
+import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
 
 @Component({
   standalone: true,
@@ -44,6 +45,7 @@ import { TimePickerComponent } from '@app/shared/components/forms/time-picker/ti
     SwitchComponent,
     DatePickerComponent,
     TimePickerComponent,
+    BackSubmitPanelComponent,
   ],
   templateUrl: './scheduling-detail.component.html',
   styleUrl: './scheduling-detail.component.scss',
@@ -88,7 +90,6 @@ export class SchedulingDetailComponent {
 
     const formData = this.route.snapshot.data.formData as SchedulingFormOutput;
     this.mode = this.route.snapshot.data.mode;
-    console.log(formData);
 
     this.formGroup = new FormGroup<SchedulingForm>({
       id: new FormControl({
@@ -107,6 +108,7 @@ export class SchedulingDetailComponent {
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
       ),
+
       doctor: new FormControl(
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
@@ -135,7 +137,7 @@ export class SchedulingDetailComponent {
     const hour = scheduling.time?.getHours() as number;
     const minute = scheduling.time?.getMinutes();
     const timestamp = scheduling.date?.setHours(hour, minute, 0, 0) as number;
-
+    debugger;
     scheduling.date = new Date(timestamp);
 
     console.log(scheduling);
@@ -186,5 +188,13 @@ export class SchedulingDetailComponent {
         notes: `${protocol.steps}`,
       });
     }
+  }
+
+  back() {
+    this.router.navigate(['scheduling']);
+  }
+
+  getWidthScreen() {
+    return window.innerWidth < 990 ? window.innerWidth : 375;
   }
 }

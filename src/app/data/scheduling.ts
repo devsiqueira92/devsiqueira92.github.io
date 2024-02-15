@@ -13,7 +13,7 @@ export let Scheduling = [
       id: '3',
       name: 'João',
     },
-    date: new Date('2024-02-10'),
+    date: new Date('2024-02-10T18:25:43.884Z'),
     status: {
       id: '1',
       name: 'Agendado',
@@ -33,7 +33,7 @@ export let Scheduling = [
       id: '4',
       name: 'Marcelo',
     },
-    date: new Date('2024-02-11'),
+    date: new Date('2024-02-11T18:25:43.884Z'),
     status: {
       id: '2',
       name: 'Cancelado',
@@ -53,7 +53,7 @@ export let Scheduling = [
       id: '3',
       name: 'João',
     },
-    date: new Date('2024-02-13'),
+    date: new Date('2024-02-13T18:25:43.884Z'),
     status: {
       id: '3',
       name: 'Em Atendimento',
@@ -73,7 +73,7 @@ export let Scheduling = [
       id: '4',
       name: 'Marcelo',
     },
-    date: new Date('2024-03-13'),
+    date: new Date('2024-03-13T13:25:43.884Z'),
     status: {
       id: '4',
       name: 'Finalizado',
@@ -93,7 +93,7 @@ export let Scheduling = [
       id: '3',
       name: 'João',
     },
-    date: new Date('2024-02-07'),
+    date: new Date('2024-02-07T18:25:43.884Z'),
     status: {
       id: '4',
       name: 'Finalizado',
@@ -113,7 +113,7 @@ export let Scheduling = [
       id: '3',
       name: 'João',
     },
-    date: new Date('2024-02-09'),
+    date: new Date('2024-02-09T18:25:43.884Z'),
     status: {
       id: '1',
       name: 'Agendado',
@@ -133,7 +133,7 @@ export let Scheduling = [
       id: '4',
       name: 'Marcelo',
     },
-    date: new Date('2024-02-09'),
+    date: new Date('2024-02-09T18:25:43.884Z'),
     status: {
       id: '1',
       name: 'Agendado',
@@ -154,7 +154,28 @@ export let Scheduling = [
       id: '4',
       name: 'Marcelo',
     },
-    date: new Date('2024-02-09'),
+    date: new Date('2024-02-09T18:25:43.884Z'),
+    status: {
+      id: '1',
+      name: 'Agendado',
+    },
+  },
+
+  {
+    id: '9',
+    patient: {
+      id: '1',
+      name: 'Eduardo',
+      phone: '9 99898-9898',
+      address: 'Rua 1',
+      birthDate: '1992-03-31',
+    },
+
+    doctor: {
+      id: '4',
+      name: 'Marcelo',
+    },
+    date: new Date('2024-02-28T18:25:43.884Z'),
     status: {
       id: '1',
       name: 'Agendado',

@@ -27,9 +27,7 @@ export class CalendarComponent implements OnInit {
   noSchedulingAvailable = false;
 
   constructor(private router: Router) {}
-  ngOnInit(): void {
-    console.log(this.events);
-  }
+  ngOnInit(): void {}
 
   displayEvent(eventDay: any, date: any) {
     return (

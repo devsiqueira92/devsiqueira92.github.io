@@ -17,5 +17,8 @@
   <app-back-submit-panel
     (submit)="submit()"
     (back)="back()"
+    [disabled]="
+      !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+    "
   ></app-back-submit-panel>
 </form>

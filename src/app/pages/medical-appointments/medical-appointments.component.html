@@ -5,7 +5,8 @@
         <th>Paciente</th>
         <th>Profissional</th>
         <th>Data</th>
-        <th>Pressão arterial</th>
+        <!-- <th>Pressão arterial</th> -->
+        <th>Situação</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -14,7 +15,8 @@
         <td>{{ data.patient.name }}</td>
         <td>{{ data.doctor.name }}</td>
         <td>{{ data.date | date }}</td>
-        <td>{{ data.bloodPressure }}</td>
+        <!-- <td>{{ data.bloodPressure }}</td> -->
+        <td>{{ data.status.name }}</td>
 
         <td>
           <a [routerLink]="'edit/' + data.id">Edit</a>

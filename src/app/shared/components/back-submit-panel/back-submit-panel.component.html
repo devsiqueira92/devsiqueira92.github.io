@@ -1,13 +1,16 @@
 <nz-form-item>
   <nz-form-control id="panel">
-    <button nz-button (click)="onBack()">Voltar</button>
-    <button
-      nz-button
-      nzType="primary"
+    <app-button
+      label="Voltar"
+      icon="left"
+      type="secondary"
+      (click)="onBack()"
+    ></app-button>
+    <app-button
+      label="Enviar"
+      icon="check"
       (click)="onSubmit()"
       [disabled]="disabled"
-    >
-      Enviar
-    </button>
+    ></app-button>
   </nz-form-control>
 </nz-form-item>
