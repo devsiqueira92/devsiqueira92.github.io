@@ -8,11 +8,16 @@ import { Observable } from 'rxjs';
 import { ProcedureService } from './services/procedure.service';
 
 @Component({
-  selector: 'app-procedures',
   standalone: true,
-  imports: [CommonModule, RouterModule, NzTableModule, NzDividerModule, LinkButtonComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzTableModule,
+    NzDividerModule,
+    LinkButtonComponent,
+  ],
   templateUrl: './procedures.component.html',
-  styleUrl: './procedures.component.scss'
+  styleUrl: './procedures.component.scss',
 })
 export class ProceduresComponent {
   listOfData$: Observable<any>;
@@ -20,6 +25,6 @@ export class ProceduresComponent {
   constructor(private proceduresService: ProcedureService) {}
 
   ngOnInit(): void {
-    this.listOfData$ = this.proceduresService.getList()
+    this.listOfData$ = this.proceduresService.getList();
   }
 }

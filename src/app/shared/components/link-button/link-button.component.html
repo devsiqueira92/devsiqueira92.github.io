@@ -1,4 +1,9 @@
-<button nz-button nzType="primary" [routerLink]="path" routerLinkActive="router-link-active" >
-    <span *ngIf="icon" nz-icon [nzType]="icon"></span>
-    {{label}}
+<button
+  nz-button
+  [nzType]="type"
+  [routerLink]="path"
+  routerLinkActive="router-link-active"
+>
+  <span *ngIf="icon" nz-icon [nzType]="icon"></span>
+  {{ label }}
 </button>

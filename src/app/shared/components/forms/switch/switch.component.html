@@ -1,0 +1,21 @@
+<form class="form" [formGroup]="parentForm">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-switch
+        (ngModelChange)="statusChange($event)"
+        class="mb-3"
+        [formControlName]="controlName"
+        (change)="valueChanged()"
+        [ngClass]="{
+          warning:
+            displayWarning(
+              parentForm.controls[controlName],
+              isSubmitting$ | async
+            ) === FormValidationStatus.warning
+        }"
+        [nzCheckedChildren]="checkedText"
+        [nzUnCheckedChildren]="UncheckedText"
+      ></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+</form>

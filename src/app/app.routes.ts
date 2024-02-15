@@ -18,11 +18,11 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'appointments',
+    path: 'scheduling',
     canActivate: [isAuthenticatedGuard],
     data: { authDesiredValue: true, redirect: '/' },
     loadChildren: () =>
-      import('./pages/appointments/appointments.routes').then(
+      import('./pages/scheduling/scheduling.routes').then(
         (m) => m.APPOINTMENTS_ROUTES
       ),
   },
@@ -50,6 +50,16 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/my-account/my-account.routes').then(
         (m) => m.MY_ACCOUNT_ROUTES
+      ),
+  },
+
+  {
+    path: 'medical-appointment',
+    canActivate: [isAuthenticatedGuard],
+    data: { authDesiredValue: true, redirect: '/' },
+    loadChildren: () =>
+      import('./pages/medical-appointments/medical-appointments.routes').then(
+        (m) => m.MEDICAL_APPOINTMENTS_ROUTES
       ),
   },
   {

@@ -1,0 +1,13 @@
+<nz-form-item>
+  <nz-form-control id="panel">
+    <button nz-button (click)="onBack()">Voltar</button>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="onSubmit()"
+      [disabled]="disabled"
+    >
+      Enviar
+    </button>
+  </nz-form-control>
+</nz-form-item>

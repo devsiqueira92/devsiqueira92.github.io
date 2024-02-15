@@ -1,0 +1,22 @@
+:host {
+  .header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .scheduling-section {
+    overflow: hidden;
+
+    .scheduling-wrapper {
+      padding: 0 2rem !important;
+
+      // padding-left: 8px;
+      // padding-right: 8px;
+      // position: absolute;
+      // background: white;
+      // top: 0;
+      // transform: translateX(0%);
+      // z-index: 9;
+      // height: 100%;
+    }
+  }
+}

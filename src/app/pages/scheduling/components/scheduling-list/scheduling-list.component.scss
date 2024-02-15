@@ -1,0 +1,10 @@
+:host {
+  ::ng-deep .scheduling-info {
+    span {
+      margin-bottom: 1rem;
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

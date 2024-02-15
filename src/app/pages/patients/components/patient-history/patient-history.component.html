@@ -1,23 +1,24 @@
-
 <div *ngIf="history$ | async as history">
-
-    <h2>Histórico de consultas do paciente</h2>
-    <div class="procedure-wrapper" *ngFor="let item of history">
-
-        <div class="procedure-info">
+  <h2>Histórico de consultas do paciente</h2>
+  <div class="procedure-wrapper" *ngFor="let item of history">
+    <!-- <div class="procedure-info">
             <span nz-icon nzType="info-circle" nzTheme="outline"></span>
-            <h3>{{ item.procedure.name }}</h3>
-        </div>
+        </div> -->
 
-        <div class="procedure-info">
-            <span nz-icon nzType="calendar" nzTheme="outline"></span>
-            <p>{{item.date | date: 'dd-MM-yyyy'}}</p>
-        </div>
-
-        <div class="procedure-info">
-            <span nz-icon nzType="user" nzTheme="outline"></span>
-            <p>{{item.doctor.name}}</p>
-        </div>
-        
+    <div class="procedure-info">
+      <span nz-icon nzType="calendar" nzTheme="outline"></span>
+      <p>{{ item.date | date : "dd-MM-yyyy" }}</p>
     </div>
+
+    <div class="procedure-info">
+      <span nz-icon nzType="user" nzTheme="outline"></span>
+      <p>{{ item.doctor.name }}</p>
+    </div>
+  </div>
+
+  <app-link-button
+    path="/patients"
+    label="Voltar"
+    type="secondary"
+  ></app-link-button>
 </div>

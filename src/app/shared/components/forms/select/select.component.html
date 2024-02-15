@@ -1,0 +1,25 @@
+<form class="form" [formGroup]="parentForm">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select
+        class="mb-3"
+        [formControlName]="controlName"
+        [nzPlaceHolder]="placeholder"
+        [nzOptions]="options"
+        (change)="valueChanged()"
+        [nzShowArrow]="false"
+        [nzAllowClear]="true"
+        [ngClass]="{
+          warning:
+            displayWarning(
+              parentForm.controls[controlName],
+              isSubmitting$ | async
+            ) === FormValidationStatus.warning
+        }"
+        nzShowSearch
+      >
+      </nz-select>
+      <ng-content></ng-content>
+    </nz-form-control>
+  </nz-form-item>
+</form>

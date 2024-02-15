@@ -1,0 +1,59 @@
+<div *ngIf="list$ | async as list" nz-row [nzGutter]="16">
+  <ng-container *ngIf="list.length; else noItems">
+    <ng-container *ngFor="let item of list">
+      <nz-card
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 12 }"
+        style="width: 400px; margin-top: 8px"
+        class="gutter-row"
+        [nzLoading]="loading"
+        [nzActions]="[actionDelete, actionEdit, actionProtocols]"
+      >
+        <div class="scheduling-info" nz-row [nzGutter]="16">
+          <div nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+            <span nz-icon nzType="user-add" nzTheme="outline"></span>
+            <span>{{ item.patient.name }}</span>
+          </div>
+
+          <div nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+            <span nz-icon nzType="user" nzTheme="outline"></span>
+            <span>{{ item.doctor.name }}</span>
+          </div>
+
+          <div nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+            <span nz-icon nzType="tag" nzTheme="outline"></span>
+            <span>{{ item.status.name }}</span>
+          </div>
+
+          <div nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+            <span nz-icon nzType="clock-circle" nzTheme="outline"></span>
+            <span>{{ item.date | date : "shortTime" }}</span>
+          </div>
+        </div>
+      </nz-card>
+      <ng-template #actionDelete>
+        <span nz-icon nzType="delete"></span>
+      </ng-template>
+      <ng-template #actionEdit>
+        <span
+          nz-icon
+          nzType="edit"
+          [routerLink]="'/scheduling/edit/' + item.id"
+        ></span>
+      </ng-template>
+
+      <ng-template #actionProtocols>
+        <span
+          nz-icon
+          nzType="check"
+          [routerLink]="'/scheduling/appointment/' + item.id"
+        ></span>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noItems>
+  <h2>no Items</h2>
+</ng-template>

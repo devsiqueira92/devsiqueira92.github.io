@@ -1,0 +1,27 @@
+<ng-container *ngIf="listOfData$ | async as listOfData">
+  <nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Profissional</th>
+        <th>Data</th>
+        <th>Pressão arterial</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.patient.name }}</td>
+        <td>{{ data.doctor.name }}</td>
+        <td>{{ data.date | date }}</td>
+        <td>{{ data.bloodPressure }}</td>
+
+        <td>
+          <a [routerLink]="'edit/' + data.id">Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</ng-container>

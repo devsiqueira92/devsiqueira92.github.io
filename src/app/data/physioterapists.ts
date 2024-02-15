@@ -1,22 +1,18 @@
 export let Physioterapists = [
   {
     id: '1',
-    name: 'Eduardo', 
-   
+    name: 'Thiago',
   },
   {
     id: '2',
-    name: 'Douglas', 
-  
+    name: 'Geovanna',
   },
   {
     id: '3',
-    name: 'João', 
-   
+    name: 'Carol',
   },
   {
     id: '4',
-    name: 'Marcelo', 
-   
+    name: 'Daniel',
   },
 ];

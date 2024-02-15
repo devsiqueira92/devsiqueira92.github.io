@@ -8,7 +8,7 @@ Cada agendamento vai ter uma data, um paciente, um fisioterapeuta e um tipo de p
 Programar o upload button
 
 
-criar uma página de login e ao aceder a aplicação, abri-la inicialmente se não estiver autenticado. 
+criar uma página de login e ao aceder a aplicação, abri-la inicialmente se não estiver autenticado.
 Caso autenticado, ir pra agendamentos
 
 
@@ -17,3 +17,6 @@ Buscar todas as consultas do paciente 1 e os procedimentos realizados
 
 nomear procedimento para protocolo ***
 
+
+criar tabela consulta, onde irá conter bpm, pressao arterial, evolução do paciente, entre outras
+consulta deve armazenar o id do agendamento, o id do paciente

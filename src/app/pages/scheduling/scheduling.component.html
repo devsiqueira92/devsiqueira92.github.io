@@ -1,0 +1,41 @@
+<section nz-row [nzGutter]="16">
+  <div nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+    <header>
+      <h2>Agendamentos</h2>
+    </header>
+  </div>
+  <!-- <div *ngIf="noSchedulingAvailable" class="header" nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span:12 }"  > -->
+  <div class="header" nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
+    <app-link-button
+      label="Novo Agendamento"
+      icon="plus"
+      path="/scheduling/create"
+    ></app-link-button>
+  </div>
+
+  <div nz-col [nzSpan]="24" style="overflow: hidden" class="scheduling-section">
+    <div nz-row [nzGutter]="16">
+      <div
+        class="gutter-row"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 8 }"
+        *ngIf="events$ | async as events"
+      >
+        <app-calendar
+          [events]="events"
+          (selectDate)="getSchedulingOnSelectedDate($event)"
+        ></app-calendar>
+      </div>
+
+      <div
+        class="gutter-row scheduling-wrapper"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 16 }"
+      >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>

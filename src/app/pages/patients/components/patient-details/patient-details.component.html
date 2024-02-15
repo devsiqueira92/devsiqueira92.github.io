@@ -1,20 +1,19 @@
-
 <form nz-form [formGroup]="formGroup">
   <app-input
-  *ngIf="mode === 'edit'"
-  [placeholder]="'Id'"
-  controlName="id"
-  [parentForm]="formGroup"
-  type="text"
-></app-input>
+    *ngIf="mode === 'edit'"
+    [placeholder]="'Id'"
+    controlName="id"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-input>
 
-<app-input
+  <app-input
     [placeholder]="'Name'"
     controlName="name"
     [parentForm]="formGroup"
     type="text"
   ></app-input>
-  
+
   <app-input
     [placeholder]="'Contato'"
     controlName="phone"
@@ -36,6 +35,8 @@
     type="text"
   ></app-input>
 
-  <app-button label="Adicionar" icon="plus" (click)="submit()"></app-button>
+  <app-back-submit-panel
+    (submit)="submit()"
+    (back)="back()"
+  ></app-back-submit-panel>
 </form>
-

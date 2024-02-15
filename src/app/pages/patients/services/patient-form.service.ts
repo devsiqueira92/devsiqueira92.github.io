@@ -1,14 +1,15 @@
-
 import { Injectable } from '@angular/core';
 import { map, Observable, of, take } from 'rxjs';
 
 import { DataMode } from '@app/shared/helpers/datamode.helper';
-import { PatientFormInput, PatientFormOutput } from '../entities/appointment-form.interface';
+import {
+  PatientFormInput,
+  PatientFormOutput,
+} from '../entities/patient-form.interface';
 import { PatientService } from './patient.service';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientFormService {
   constructor(private patientService: PatientService) {}

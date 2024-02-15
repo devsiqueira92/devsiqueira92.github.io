@@ -9,16 +9,14 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
   standalone: true,
   imports: [NzBadgeModule, NgFor, NgIf, NzPopoverModule],
   templateUrl: './popover.component.html',
-  styleUrl: './popover.component.scss'
+  styleUrl: './popover.component.scss',
 })
 export class PopoverComponent {
   @Input() item: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
 
-  }
-
-  editAppointment() {
-    this.router.navigate(['appointments/edit', 1])
+  editScheduling() {
+    this.router.navigate(['scheduling/edit', 1]);
   }
 }

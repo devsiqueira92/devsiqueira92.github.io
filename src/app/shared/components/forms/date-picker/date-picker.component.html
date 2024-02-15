@@ -1,0 +1,25 @@
+<form class="form" [formGroup]="parentForm">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-date-picker
+        class="mb-3"
+        [formControlName]="controlName"
+        [nzPlaceHolder]="placeholder"
+        (change)="valueChanged()"
+        [nzAllowClear]="true"
+        [ngClass]="{
+          warning:
+            displayWarning(
+              parentForm.controls[controlName],
+              isSubmitting$ | async
+            ) === FormValidationStatus.warning
+        }"
+        nzShowSearch
+      >
+      </nz-date-picker>
+      <ng-content></ng-content>
+      <!-- To have the input with a green border on success change to
+                  [ngClass]="displayWarning(parentForm.controls[formControlName])" -->
+    </nz-form-control>
+  </nz-form-item>
+</form>

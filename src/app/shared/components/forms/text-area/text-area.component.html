@@ -1,0 +1,34 @@
+<form class="form" [formGroup]="parentForm">
+  <nz-form-item>
+    <nz-form-control>
+      <textarea
+        rows="6"
+        class="form-control did-floating-input"
+        [autocomplete]="autocomplete"
+        [ngClass]="{
+          warning:
+            displayWarning(
+              parentForm.controls[controlName],
+              isSubmitting$ | async
+            ) === FormValidationStatus.warning
+        }"
+        nz-input
+        [formControlName]="controlName"
+        placeholder=" "
+        (change)="valueChanged()"
+      ></textarea>
+
+      <label class="did-floating-label">{{ placeholder }}</label>
+
+      <ng-template #suffix>
+        <i
+          *ngIf="type === 'password'"
+          nz-icon
+          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+          (click)="passwordVisible = !passwordVisible"
+        ></i>
+      </ng-template>
+    </nz-form-control>
+    <ng-content></ng-content>
+  </nz-form-item>
+</form>
