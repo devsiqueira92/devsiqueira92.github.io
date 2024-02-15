@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-.ant-table-content {
-  overflow: auto;
+
+ul {
+  padding: 0;
+  list-style: none;
+  li {
+    font-size: 1rem;
+    margin-bottom: 0.875rem;
+    span {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: blue;
+    }
+  }
 }

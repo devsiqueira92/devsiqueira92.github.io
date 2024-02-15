@@ -1,16 +1,23 @@
-
-<app-link-button label="Novo Paciente" icon="plus" path="create"></app-link-button>
+<app-link-button
+  label="Novo Paciente"
+  icon="plus"
+  path="create"
+></app-link-button>
 
 <ng-container *ngIf="listOfData$ | async as listOfData">
-
-  <nz-table #basicTable [nzData]="listOfData">
+  <nz-table
+    #basicTable
+    [nzData]="listOfData"
+    [nzScroll]="{ y: '740px' }"
+    [nzScroll]="{ x: '900px' }"
+  >
     <thead>
       <tr>
         <th>Name</th>
         <th>Phone</th>
         <th>Address</th>
         <th>birthDate</th>
-        <th>Action</th>
+        <th nzWidth="180px">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -19,15 +26,15 @@
         <td>{{ data.phone }}</td>
         <td>{{ data.address }}</td>
         <td>{{ data.birthDate }}</td>
-        
+
         <td>
-          <a [routerLink]="'edit/'+ data.id">Edit</a>
+          <a [routerLink]="'edit/' + data.id">Edit</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a [routerLink]="'history/'+ data.id">Histórico</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
+          <a [routerLink]="'history/' + data.id">Histórico</a>
+          <!-- <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a> -->
         </td>
       </tr>
-  </tbody>
-</nz-table>
+    </tbody>
+  </nz-table>
 </ng-container>

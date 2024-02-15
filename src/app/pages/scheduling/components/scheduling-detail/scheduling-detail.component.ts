@@ -29,6 +29,11 @@ import { SwitchComponent } from '@app/shared/components/forms/switch/switch.comp
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 import { TimePickerComponent } from '@app/shared/components/forms/time-picker/time-picker.component';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
+import {
+  NzNotificationModule,
+  NzNotificationService,
+} from 'ng-zorro-antd/notification';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   standalone: true,
@@ -46,6 +51,8 @@ import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-pan
     DatePickerComponent,
     TimePickerComponent,
     BackSubmitPanelComponent,
+    NzNotificationModule,
+    NzDividerModule,
   ],
   templateUrl: './scheduling-detail.component.html',
   styleUrl: './scheduling-detail.component.scss',
@@ -64,7 +71,8 @@ export class SchedulingDetailComponent {
     private proceduresService: ProcedureService,
     private patientService: PatientService,
     private physioterapistService: PhysioterapistService,
-    private router: Router
+    private router: Router,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -188,6 +196,12 @@ export class SchedulingDetailComponent {
         notes: `${protocol.steps}`,
       });
     }
+
+    this.notification.blank(
+      protocol.name,
+      'Protocolo adicionado ao campo Evolução com sucesso!',
+      { nzDuration: 5000 }
+    );
   }
 
   back() {

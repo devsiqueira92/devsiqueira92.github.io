@@ -80,6 +80,7 @@
   </div>
 
   <div class="gutter-row" nz-col [nzSpan]="24" *ngIf="mode === 'view'">
+    <nz-divider nzType="horizontal"></nz-divider>
     <h2>Detalhes da consulta</h2>
     <div class="scheduling-details-form" nz-row [nzGutter]="16">
       <app-input
@@ -144,38 +145,6 @@
     ></app-back-submit-panel>
   </div>
 </form>
-<!--
-<nz-drawer
-  [nzClosable]="false"
-  [nzVisible]="visible"
-  nzPlacement="right"
-  nzTitle="Lista de protocolos"
-  (nzOnClose)="close()"
-  [nzFooter]="footerTpl"
-  [nzMaskClosable]="false"
-  [nzBodyStyle]="{ overflow: 'auto' }"
->
-  <ng-container *nzDrawerContent>
-    <ul>
-      <li
-        *ngFor="let item of procedureList$ | async"
-        (click)="selectProtocol(item)"
-      >
-        <span nz-icon nzType="caret-left" nzTheme="outline"></span>
-        {{ item.name }}
-      </li>
-    </ul>
-  </ng-container>
-
-  <ng-template #footerTpl>
-    <div style="float: right">
-      <button nz-button style="margin-right: 8px" (click)="close()">
-        Cancel
-      </button>
-      <button nz-button nzType="primary" (click)="close()">Submit</button>
-    </div>
-  </ng-template>
-</nz-drawer> -->
 
 <nz-drawer
   [nzVisible]="visible"
@@ -186,7 +155,7 @@
   [nzWidth]="getWidthScreen()"
 >
   <ng-container *nzDrawerContent>
-    <ul>
+    <ul class="protocol-list">
       <li
         *ngFor="let item of procedureList$ | async"
         (click)="selectProtocol(item)"
@@ -198,5 +167,5 @@
   </ng-container>
 </nz-drawer>
 <ng-template #footerTpl>
-  <button nz-button nzType="default" (click)="close()">Fechar</button>
+  <app-button label="Fechar" (click)="close()"></app-button>
 </ng-template>

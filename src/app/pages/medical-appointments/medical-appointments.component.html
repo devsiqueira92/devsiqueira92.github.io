@@ -1,5 +1,10 @@
 <ng-container *ngIf="listOfData$ | async as listOfData">
-  <nz-table #basicTable [nzData]="listOfData">
+  <nz-table
+    #basicTable
+    [nzData]="listOfData"
+    [nzScroll]="{ y: '740px' }"
+    [nzScroll]="{ x: '900px' }"
+  >
     <thead>
       <tr>
         <th>Paciente</th>
@@ -7,7 +12,7 @@
         <th>Data</th>
         <!-- <th>Pressão arterial</th> -->
         <th>Situação</th>
-        <th>Action</th>
+        <th nzWidth="120px">Action</th>
       </tr>
     </thead>
     <tbody>
