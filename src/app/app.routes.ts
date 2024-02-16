@@ -2,16 +2,21 @@ import { Routes } from '@angular/router';
 import { isAuthenticatedGuard } from './shared/guards/is-authenticated.guard';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: '', pathMatch: 'full', redirectTo: '/auth' },
   {
-    path: 'home',
+    path: 'auth',
     loadChildren: () =>
-      import('./pages/home/home.routes').then((m) => m.HOME_ROUTES),
+      import('./pages/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
+  // {
+  //   path: 'home',
+  //   loadChildren: () =>
+  //     import('./pages/home/home.routes').then((m) => m.HOME_ROUTES),
+  // },
   {
     path: 'physioterapists',
     canActivate: [isAuthenticatedGuard],
-    data: { authDesiredValue: true, redirect: '/' },
+    data: { authDesiredValue: true, redirect: '/auth' },
     loadChildren: () =>
       import('./pages/physioterapists/physioterapists.routes').then(
         (m) => m.PHYSIOTERAPISTS_ROUTES
@@ -61,10 +66,5 @@ export const routes: Routes = [
       import('./pages/medical-appointments/medical-appointments.routes').then(
         (m) => m.MEDICAL_APPOINTMENTS_ROUTES
       ),
-  },
-  {
-    path: 'register',
-    loadChildren: () =>
-      import('./pages/register/register.routes').then((m) => m.REGISTER_ROUTES),
   },
 ];

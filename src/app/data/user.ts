@@ -1,0 +1,38 @@
+export let Users = [
+  {
+    id: '1',
+    email: 'user1@email.com',
+    password: 'user1',
+    crefito: '1234',
+    role: 'Owner',
+    name: 'User 1',
+    token: 'user1_token',
+  },
+  {
+    id: '2',
+    email: 'user2@email.com',
+    password: 'user2',
+    crefito: '1234',
+    role: 'Contributor',
+    name: 'User 2',
+    token: 'user2_token',
+  },
+  {
+    id: '3',
+    email: 'user3@email.com',
+    password: 'user3',
+    crefito: '1234',
+    role: 'Contributor',
+    name: 'User 3',
+    token: 'user3_token',
+  },
+  {
+    id: '4',
+    email: 'user4@email.com',
+    password: 'user4',
+    crefito: '1234',
+    role: 'User',
+    name: 'User 4',
+    token: 'user4_token',
+  },
+];

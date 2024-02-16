@@ -6,6 +6,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { ProcedureService } from './services/procedure.service';
+import { AccessControlDirective } from '@app/shared/directives/access-control.directive';
 
 @Component({
   standalone: true,
@@ -15,6 +16,7 @@ import { ProcedureService } from './services/procedure.service';
     NzTableModule,
     NzDividerModule,
     LinkButtonComponent,
+    AccessControlDirective,
   ],
   templateUrl: './procedures.component.html',
   styleUrl: './procedures.component.scss',

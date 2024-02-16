@@ -145,7 +145,6 @@ export class SchedulingDetailComponent {
     const hour = scheduling.time?.getHours() as number;
     const minute = scheduling.time?.getMinutes();
     const timestamp = scheduling.date?.setHours(hour, minute, 0, 0) as number;
-    debugger;
     scheduling.date = new Date(timestamp);
 
     console.log(scheduling);

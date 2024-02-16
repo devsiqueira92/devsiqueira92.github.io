@@ -15,7 +15,7 @@
 .sidebar-logo {
   position: relative;
   height: 64px;
-  padding-left: 24px;
+  text-align: center;
   overflow: hidden;
   line-height: 64px;
   background: #001529;
@@ -24,8 +24,8 @@
 
 .sidebar-logo img {
   display: inline-block;
-  height: 32px;
-  width: 32px;
+  height: 83px;
+  width: 83px;
   vertical-align: middle;
 }
 
@@ -55,4 +55,18 @@ nz-content {
   height: 100%;
   max-height: 800px;
   overflow-y: auto;
+}
+
+.trigger {
+  flex: 1;
+  background-color: white;
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
 }

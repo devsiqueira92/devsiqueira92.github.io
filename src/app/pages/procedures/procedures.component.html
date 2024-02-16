@@ -15,7 +15,7 @@
       <tr>
         <th>Name</th>
         <th>Passos</th>
-        <th nzWidth="120px">Action</th>
+        <th nzWidth="160px"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,9 +24,14 @@
         <td>{{ data.steps }}</td>
 
         <td>
-          <a [routerLink]="'edit/' + data.id">Edit</a>
+          <a
+            accessControl
+            moduleType="user3_token"
+            [routerLink]="'edit/' + data.id"
+            >Editar</a
+          >
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
+          <a>Apagar</a>
         </td>
       </tr>
     </tbody>

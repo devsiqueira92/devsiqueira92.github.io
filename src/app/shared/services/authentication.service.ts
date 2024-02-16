@@ -6,7 +6,6 @@ import { SubSink } from 'subsink';
 import { Login } from '../interfaces/login.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
 
-
 /* eslint-enable */
 const TOKEN_KEY = 'authorization';
 const TOKEN_RENEW_DELAY_OFFSET = 5000; // 5 sec
@@ -16,15 +15,13 @@ function tokenGetter(): string {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   authenticated$ = new BehaviorSubject<boolean | null>(null);
   // token$ = new BehaviorSubject<Token | null>(null);
   token$ = new BehaviorSubject<string | null>(null);
   private subs = new SubSink();
-  
-
 
   constructor(private userService: UserService) {
     if (this.isAuthenticated) {
@@ -32,9 +29,9 @@ export class AuthenticationService {
       // this.subs.sink = this.setupTokenRenewalSubscription(tokenGetter());
       this.token$.next(this.decodeToken(tokenGetter()));
     }
-   }
+  }
 
-   private fetchUserInfo(): void {
+  private fetchUserInfo(): void {
     // this.clientApi
     //   .getMyClientAccount()
     //   .pipe(
@@ -56,7 +53,7 @@ export class AuthenticationService {
   }
 
   login(loginInput: Login) {
-    return this.userService.registerUser(loginInput).pipe(
+    return this.userService.authenticateUser(loginInput).pipe(
       map((r) => r.token as string),
       tap(this.authenticateLocally),
       tap((_) => {
@@ -79,12 +76,11 @@ export class AuthenticationService {
     this.token$.next(this.decodeToken(token));
   }
 
-
   // private decodeToken(token: string): Token | null {
   private decodeToken(token: string): string | null {
     if (token) {
       // return this.jwtHelper.decodeToken(token);
-      return `decoded_authentication_token_here`;
+      return token;
     }
     return null;
   }
@@ -98,6 +94,14 @@ export class AuthenticationService {
     return false;
   }
 
+  getRole(role: string[]): boolean {
+    const token = tokenGetter();
+    if (token) {
+      return role.includes(token);
+    }
+    return false;
+  }
+
   logout(): void {
     sessionStorage.removeItem(TOKEN_KEY);
     // this.clientAccount$.next(null);
@@ -106,4 +110,7 @@ export class AuthenticationService {
     this.subs.unsubscribe();
   }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 }

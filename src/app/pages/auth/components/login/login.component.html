@@ -1,0 +1,41 @@
+<div class="form-wrapper">
+  <form id="login-form" [formGroup]="formGroup" nz-row [nzGutter]="16">
+    <div class="avatar-wrapper" nz-col [nzSpan]="24">
+      <div class="avatar"></div>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <div class="mt-2">
+        <app-login-input
+          [control]="formGroup.controls.email"
+          [placeholder]="'Email'"
+          type="text"
+          aria-input-field-name="Login input"
+        ></app-login-input>
+      </div>
+
+      <div class="mt-2">
+        <app-login-input
+          [control]="formGroup.controls.password"
+          [placeholder]="'Senha'"
+          type="password"
+          aria-input-field-name="Password input"
+        ></app-login-input>
+      </div>
+    </div>
+    <div class="auth-cta" nz-col nzSpan="24">
+      <app-button (click)="login()" label="Registrar" type="secondary">
+      </app-button>
+
+      <app-button (click)="login()" label="Entrar"> </app-button>
+    </div>
+
+    <div nz-col nzSpan="24">
+      <a>Esqueceu a senha?</a>
+    </div>
+
+    <!-- <div class="space-between-row">
+      <label nz-checkbox formControlName="rememberMe">{{ "RememberMe" }}</label>
+    </div> -->
+  </form>
+</div>

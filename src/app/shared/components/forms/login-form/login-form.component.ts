@@ -9,7 +9,7 @@ import { Login } from '@app/shared/interfaces/login.interface';
   standalone: true,
   imports: [ReactiveFormsModule, LoginInputComponent, ButtonComponent],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss'
+  styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
   @Output() forgotPasswordButtonClick = new EventEmitter<void>();

@@ -1,18 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/app.scss";
 
-ul {
-  padding: 0;
-  list-style: none;
-  li {
-    font-size: 1rem;
-    margin-bottom: 0.875rem;
-    span {
-      margin-right: 0.5rem;
-    }
+// ul {
+//   padding: 0;
+//   list-style: none;
+//   li {
+//     font-size: 1rem;
+//     margin-bottom: 0.875rem;
+//     span {
+//       margin-right: 0.5rem;
+//     }
 
-    &:hover {
-      cursor: pointer;
-      color: blue;
-    }
-  }
-}
+//     &:hover {
+//       cursor: pointer;
+//       color: blue;
+//     }
+//   }
+// }

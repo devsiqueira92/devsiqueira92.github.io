@@ -1,0 +1,26 @@
+:host {
+  .form-wrapper {
+    margin: 0 auto;
+    max-width: 450px;
+
+    .avatar-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+      .avatar {
+        background-color: #afafaf;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-image: url("../../../../../assets/imgs/physio-white-logo.svg");
+        background-size: contain;
+      }
+    }
+
+    .auth-cta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+  }
+}

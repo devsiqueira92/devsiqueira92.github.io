@@ -2,51 +2,49 @@
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
-    nzWidth="200px"
+    [nzWidth]="uncollapsedSize"
     nzBreakpoint="lg"
+    [nzTrigger]="null"
+    [(nzCollapsed)]="isCollapsed"
+    [appShowIfLogged]="true"
   >
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Physio</h1>
+      <a routerLink="" target="_blank">
+        <img src="../assets/imgs/physio-logo.svg" alt="logo" />
+        <h1 class="screen-reader-txt">Physio</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline">
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [ngStyle]="{ overflow: !isCollapsed ? 'hidden' : 'unset' }"
+    >
       <li nz-menu-item routerLink="/home" nzMatchRouter>
         <span nz-icon nzType="home"></span>
-        <span>Home</span>
+        <span>Inicio</span>
       </li>
 
-      <li
-        [appShowIfLogged]="true"
-        nz-menu-item
-        routerLink="/scheduling"
-        nzMatchRouter
-      >
+      <li nz-menu-item routerLink="/scheduling" nzMatchRouter>
         <span nz-icon nzType="calendar" nzTheme="outline"></span>
-        <span>Scheduling</span>
+        <span>Agendamento</span>
       </li>
 
-      <li
-        [appShowIfLogged]="true"
-        nz-submenu
-        nzTitle="Management"
-        nzIcon="setting"
-      >
+      <li nz-submenu nzTitle="Gerenciamento" nzIcon="setting">
         <ul>
           <li nz-menu-item routerLink="/patients" nzMatchRouter>
             <span nz-icon nzType="contacts" nzTheme="outline"></span>
-            <span>Patients</span>
+            <span>Pacientes</span>
           </li>
 
           <li nz-menu-item routerLink="/physioterapists" nzMatchRouter>
             <span nz-icon nzType="team" nzTheme="outline"></span>
-            <span>Physioterapists</span>
+            <span>Fisioterapeutas</span>
           </li>
 
           <li nz-menu-item routerLink="/procedures" nzMatchRouter>
             <span nz-icon nzType="exclamation-circle" nzTheme="outline"></span>
-            <span>Procedures</span>
+            <span>Protocolos</span>
           </li>
 
           <li nz-menu-item routerLink="/medical-appointment" nzMatchRouter>
@@ -58,8 +56,17 @@
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
-      <app-header></app-header>
+    <nz-header [appShowIfLogged]="true">
+      <div style="display: flex">
+        <div class="trigger">
+          <span
+            nz-icon
+            [nzType]="!isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            (click)="isCollapsed = !isCollapsed"
+          ></span>
+        </div>
+        <app-header></app-header>
+      </div>
     </nz-header>
     <div class="inner-content">
       <router-outlet></router-outlet>

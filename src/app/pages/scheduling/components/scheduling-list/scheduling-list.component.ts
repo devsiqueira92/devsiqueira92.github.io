@@ -7,6 +7,7 @@ import { LinkButtonComponent } from '@app/shared/components/link-button/link-but
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { AccessControlDirective } from '@app/shared/directives/access-control.directive';
 
 @Component({
   selector: 'app-scheduling-list',
@@ -18,6 +19,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     NzIconModule,
     NzGridModule,
     RouterModule,
+    AccessControlDirective,
   ],
   templateUrl: './scheduling-list.component.html',
   styleUrl: './scheduling-list.component.scss',

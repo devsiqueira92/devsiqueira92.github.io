@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -13,19 +13,32 @@ import { ShowIfLoggedDirective } from './shared/directives/show-if-authorized.di
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, 
-    RouterModule, 
+  imports: [
+    CommonModule,
+    RouterModule,
     RouterOutlet,
-    NzIconModule, 
-    NzLayoutModule, 
-    NzMenuModule, 
-    NzButtonModule, 
-    FooterComponent, 
-    HeaderComponent, 
-    ReactiveFormsModule, ShowIfLoggedDirective],
+    NzIconModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzButtonModule,
+    FooterComponent,
+    HeaderComponent,
+    NzIconModule,
+    ReactiveFormsModule,
+    ShowIfLoggedDirective,
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  isCollapsed = true;
+export class AppComponent implements OnInit {
+  isCollapsed = false;
+  collapsedSize: string;
+  uncollapsedSize: string;
+
+  isMobile = window.innerWidth < 720;
+
+  ngOnInit(): void {
+    this.collapsedSize = this.isMobile ? '80px' : '0';
+    this.uncollapsedSize = !this.isMobile ? '200px' : '0';
+  }
 }

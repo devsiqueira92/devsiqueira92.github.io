@@ -39,27 +39,28 @@ export class isAuthenticatedGuard implements CanActivate {
       return false;
     }
     if (!this.auth.isAuthenticated && route.data.authDesiredValue) {
-      return this.modalAuthTrigger();
+      const sourceUrl = this.router.url;
+      this.router.navigate([sourceUrl]);
     }
 
     return true;
   }
 
-  private modalAuthTrigger = (): Promise<boolean> =>
-    lastValueFrom(
-      this.modalAuthTriggerService
-        .create()
-        .afterClose.asObservable()
-        .pipe(
-          map((_) => this.auth.isAuthenticated),
-          tap((canActivate) => {
-            /* We direct access to the route with triggerAuthModal, we don't want to stay
-                     on the same page so we redirect to the home page */
-            const sourceUrl = this.router.url;
-            if (!canActivate && sourceUrl === '/') {
-              this.router.navigate([sourceUrl]);
-            }
-          })
-        )
-    );
+  // private modalAuthTrigger = (): Promise<boolean> =>
+  //   lastValueFrom(
+  //     this.modalAuthTriggerService
+  //       .create()
+  //       .afterClose.asObservable()
+  //       .pipe(
+  //         map((_) => this.auth.isAuthenticated),
+  //         tap((canActivate) => {
+  //           /* We direct access to the route with triggerAuthModal, we don't want to stay
+  //                    on the same page so we redirect to the home page */
+  //           const sourceUrl = this.router.url;
+  //           if (!canActivate && sourceUrl === '/') {
+  //             this.router.navigate([sourceUrl]);
+  //           }
+  //         })
+  //       )
+  //   );
 }
