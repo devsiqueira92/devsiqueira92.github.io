@@ -14,7 +14,6 @@ import { AuthenticationService } from '@app/shared/services/authentication.servi
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
-  selector: 'app-register',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -52,6 +51,6 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authenticationService
       .register(this.formGroup.getRawValue() as RegisterForm)
-      .subscribe(() => this.router.navigate(['/home']));
+      .subscribe(() => this.router.navigate(['/scheduling']));
   }
 }

@@ -30,25 +30,67 @@ export class MedicalAppointmentService {
 
   getById(id: string | null): Observable<any> {
     const result = this.medicalAppointments.find(
-      (medicalAppointment) => medicalAppointment.id === id
+      (medicalAppointment) => medicalAppointment.schedulingId === id
     );
     return of(result);
   }
 
   add(medicalAppointment: any) {
-    let medicalAppointmentsAdded = { medicalAppointment };
-    medicalAppointmentsAdded.medicalAppointment.id = (
+    const mock: any = {
+      id: medicalAppointment.id,
+      schedulingId: medicalAppointment.id,
+      scheduling: {
+        status: {
+          name: 'Finalizado',
+        },
+        date: '2024-02-10T18:25:43.884Z',
+        doctor: {
+          name: 'Geovanna',
+        },
+        patient: {
+          name: 'Eduardo',
+        },
+      },
+      bpm: medicalAppointment.bpm,
+      bloodPressure: medicalAppointment.bloodPressure,
+      evolution: medicalAppointment.evolution,
+      details: medicalAppointment.details,
+    };
+
+    let medicalAppointmentsAdded = { mock };
+    medicalAppointmentsAdded.mock.id = (
       this.medicalAppointments.length + 1
     ).toString();
 
-    this.medicalAppointments.push(medicalAppointmentsAdded.medicalAppointment);
+    this.medicalAppointments.push(medicalAppointmentsAdded.mock);
   }
 
   update(medicalAppointments: any) {
+    const mock: any = {
+      id: medicalAppointments.id,
+      schedulingId: medicalAppointments.id,
+      scheduling: {
+        status: {
+          name: 'Finalizado',
+        },
+        date: '2024-02-10T18:25:43.884Z',
+        doctor: {
+          name: 'Geovanna',
+        },
+        patient: {
+          name: 'Eduardo',
+        },
+      },
+      bpm: medicalAppointments.bpm,
+      bloodPressure: medicalAppointments.bloodPressure,
+      evolution: medicalAppointments.evolution,
+      details: medicalAppointments.details,
+    };
+
     const medicalAppointmentsIndex = this.medicalAppointments.findIndex(
       (_medicalAppointments) =>
         _medicalAppointments.id === medicalAppointments.id
     );
-    this.medicalAppointments[medicalAppointmentsIndex] = medicalAppointments;
+    this.medicalAppointments[medicalAppointmentsIndex] = mock;
   }
 }

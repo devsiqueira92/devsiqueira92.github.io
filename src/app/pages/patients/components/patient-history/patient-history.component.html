@@ -1,19 +1,49 @@
 <div *ngIf="history$ | async as history">
-  <h2>Histórico de consultas do paciente</h2>
-  <div class="procedure-wrapper" *ngFor="let item of history">
+  <h3>Histórico de consultas</h3>
+  <!-- {{ history[0] | json }} -->
+  <div
+    class="patient-info"
+    [routerLink]="'/patients/edit/' + history[0].patient.id"
+  >
+    <span nz-icon nzType="user" nzTheme="outline"></span>
+    <h4>Paciente: {{ history[0].patient.name }}</h4>
+  </div>
+
+  <div
+    class="procedure-wrapper"
+    *ngFor="let item of history"
+    nz-row
+    nzGutter="16"
+  >
     <!-- <div class="procedure-info">
             <span nz-icon nzType="info-circle" nzTheme="outline"></span>
         </div> -->
 
-    <div class="procedure-info">
-      <span nz-icon nzType="calendar" nzTheme="outline"></span>
-      <p>{{ item.date | date : "dd-MM-yyyy" }}</p>
+    <div class="appointment-details" nz-col nzSpan="8">
+      <div class="procedure-info">
+        <span nz-icon nzType="calendar" nzTheme="outline"></span>
+        <p>{{ item.date | date : "dd-MM-yyyy" }}</p>
+      </div>
+
+      <div
+        class="procedure-info"
+        [routerLink]="'/physioterapists/edit/' + item.doctor.id"
+      >
+        <span nz-icon nzType="user" nzTheme="outline"></span>
+        <p>{{ item.doctor.name }}</p>
+      </div>
     </div>
 
-    <div class="procedure-info">
-      <span nz-icon nzType="user" nzTheme="outline"></span>
-      <p>{{ item.doctor.name }}</p>
+    <div class="see-details" nz-col nz-col nzSpan="16">
+      <span
+        nz-icon
+        nzType="arrow-right"
+        nzTheme="outline"
+        (click)="checkAppointmentDetails(item.id)"
+      ></span>
     </div>
+
+    <nz-divider nzType="horizontal" nz-col nzSpan="24"></nz-divider>
   </div>
 
   <app-link-button

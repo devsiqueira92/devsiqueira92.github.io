@@ -11,7 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Observable, shareReplay, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-datepicker',
+  selector: 'app-date-picker',
   standalone: true,
   imports: [
     NzDatePickerModule,

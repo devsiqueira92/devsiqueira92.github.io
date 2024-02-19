@@ -11,13 +11,19 @@
     </ul>
   </nz-calendar> -->
 
-
-<nz-calendar (nzPanelChange)="panelChange($event)"(nzSelectChange)="selectChange($event)" [nzFullscreen]="false">
-   <ul *nzDateFullCell="let date" class="events" 
-   [ngClass]="{
-      active: hasEvent(date).length > 0 && hasEvent(date).length < 2,
-      full: hasEvent(date).length > 1 
-   }">
-      <span>{{ date.getDate() }}</span>
-   </ul>
- </nz-calendar>
+<nz-calendar
+  (nzPanelChange)="panelChange($event)"
+  (nzSelectChange)="selectChange($event)"
+  [nzFullscreen]="false"
+>
+  <ul
+    *nzDateFullCell="let date"
+    class="events"
+    [ngClass]="{
+      active: hasEvent(date).length > 0,
+      full: hasEvent(date).length > 0 && hasEvent(date).length > 3
+    }"
+  >
+    <span>{{ date.getDate() }}</span>
+  </ul>
+</nz-calendar>

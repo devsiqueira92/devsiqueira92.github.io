@@ -7,6 +7,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { MedicalAppointmentService } from './services/medical-appointment.service';
 import { SchedulingService } from '../scheduling/services/scheduling.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ import { SchedulingService } from '../scheduling/services/scheduling.service';
     NzTableModule,
     NzDividerModule,
     LinkButtonComponent,
+    NzIconModule,
   ],
   templateUrl: './medical-appointments.component.html',
   styleUrl: './medical-appointments.component.scss',
@@ -29,6 +31,6 @@ export class MedicalAppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.listOfData$ = this.schedulingService.getList();
+    this.listOfData$ = this.medicalAppointmentService.getList();
   }
 }

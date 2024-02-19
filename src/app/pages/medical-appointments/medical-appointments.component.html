@@ -1,3 +1,5 @@
+<h2>Histórico de consultas</h2>
+
 <ng-container *ngIf="listOfData$ | async as listOfData">
   <nz-table
     #basicTable
@@ -10,23 +12,27 @@
         <th>Paciente</th>
         <th>Profissional</th>
         <th>Data</th>
-        <!-- <th>Pressão arterial</th> -->
         <th>Situação</th>
         <th nzWidth="160px"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.patient.name }}</td>
-        <td>{{ data.doctor.name }}</td>
-        <td>{{ data.date | date }}</td>
-        <!-- <td>{{ data.bloodPressure }}</td> -->
-        <td>{{ data.status.name }}</td>
+        <td>{{ data.scheduling.patient.name }}</td>
+        <td>{{ data.scheduling.doctor.name }}</td>
+        <td>{{ data.scheduling.date | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.scheduling.status.name }}</td>
 
-        <td>
-          <a [routerLink]="'edit/' + data.id">Editar</a>
+        <td class="actions">
+          <span
+            nz-icon
+            nzType="edit"
+            nzTheme="outline"
+            class="edit"
+            [routerLink]="'edit/' + data.id"
+          ></span>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Apagar</a>
+          <span class="delete" nz-icon nzType="delete" nzTheme="outline"></span>
         </td>
       </tr>
     </tbody>

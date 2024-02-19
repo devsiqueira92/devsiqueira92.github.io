@@ -17,6 +17,7 @@ import { PatientService } from '../../services/patient.service';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { NgIf } from '@angular/common';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
+import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 
 @Component({
   standalone: true,
@@ -26,6 +27,7 @@ import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-pan
     ButtonComponent,
     NgIf,
     BackSubmitPanelComponent,
+    DatePickerComponent,
   ],
   templateUrl: './patient-details.component.html',
   styleUrl: './patient-details.component.scss',

@@ -59,7 +59,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'medical-appointment',
+    path: 'medical-appointments',
     canActivate: [isAuthenticatedGuard],
     data: { authDesiredValue: true, redirect: '/' },
     loadChildren: () =>

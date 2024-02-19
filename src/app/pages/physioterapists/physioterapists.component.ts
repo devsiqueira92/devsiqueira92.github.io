@@ -6,20 +6,27 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { PhysioterapistService } from './services/physioterapist.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, NzTableModule, NzDividerModule, LinkButtonComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzTableModule,
+    NzDividerModule,
+    LinkButtonComponent,
+    NzIconModule,
+  ],
   templateUrl: './physioterapists.component.html',
-  styleUrl: './physioterapists.component.scss'
+  styleUrl: './physioterapists.component.scss',
 })
 export class PhysioterapistsComponent {
-
   listOfData$: Observable<any>;
 
   constructor(private physioterapistService: PhysioterapistService) {}
 
   ngOnInit(): void {
-    this.listOfData$ = this.physioterapistService.getList()
+    this.listOfData$ = this.physioterapistService.getList();
   }
 }

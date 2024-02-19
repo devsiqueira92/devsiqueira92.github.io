@@ -1,29 +1,20 @@
 export let Procedures = [
   {
     id: '1',
-    name: 'Procedimento 1', 
-    steps: 'Erguer o braço; abaixar o braço',
-    member: 'Braço'
-   
+    name: 'Protocolo de joelho',
+    steps: 'Erguer o joelho; abaixar o joelho',
+    member: 'Braço',
   },
   {
     id: '2',
-    name: 'Procedimento 2', 
-    steps: 'Erguer o braço; abaixar o braço',
-    member: 'Braço'
-  
+    name: 'Protocolo de ombro',
+    steps: 'Erguer o ombro; abaixar o ombro',
+    member: 'Braço',
   },
   {
     id: '3',
-    name: 'Procedimento 3', 
+    name: 'Protocolo de braço',
     steps: 'Erguer o braço; abaixar o braço',
-    member: 'Braço'
-   
-  },
-  {
-    id: '4',
-    name: 'Procedimento 4', 
-    steps: 'Erguer o braço; abaixar o braço',
-    member: 'Braço'
+    member: 'Braço',
   },
 ];

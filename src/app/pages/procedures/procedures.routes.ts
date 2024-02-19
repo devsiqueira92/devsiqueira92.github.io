@@ -10,10 +10,10 @@ export const PROCEDURES_ROUTES: Routes = [
 
   {
     path: 'edit/:id',
-    canActivate: [RoleGuard],
+    // canActivate: [RoleGuard],
     component: ProcedureDetailsComponent,
     resolve: { formData: ProcedureResolver },
-    data: { mode: DataMode.edit, roles: ['user_token'] },
+    data: { mode: DataMode.edit, roles: ['user3_token'] },
   },
 
   {

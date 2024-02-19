@@ -14,6 +14,13 @@
     type="text"
   ></app-input>
 
+  <app-date-picker
+    [placeholder]="'Data de nascimento'"
+    controlName="birthDate"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-date-picker>
+
   <app-back-submit-panel
     (submit)="submit()"
     (back)="back()"

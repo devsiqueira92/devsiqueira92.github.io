@@ -34,6 +34,7 @@ import {
   NzNotificationService,
 } from 'ng-zorro-antd/notification';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { AppointmentDateService } from '@app/shared/services/appointment-date.service';
 
 @Component({
   standalone: true,
@@ -72,7 +73,8 @@ export class SchedulingDetailComponent {
     private patientService: PatientService,
     private physioterapistService: PhysioterapistService,
     private router: Router,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private dateService: AppointmentDateService
   ) {}
 
   ngOnInit(): void {
@@ -105,13 +107,13 @@ export class SchedulingDetailComponent {
         disabled: this.mode === DataMode.edit,
       }),
       date: new FormControl(
-        { value: null, disabled: this.mode === DataMode.view },
+        { value: null, disabled: this.mode !== DataMode.edit },
         Validators.required
       ),
-      time: new FormControl(
-        { value: null, disabled: this.mode === DataMode.view },
-        Validators.required
-      ),
+      time: new FormControl({
+        value: null,
+        disabled: this.mode !== DataMode.edit,
+      }),
       patient: new FormControl(
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
@@ -121,12 +123,6 @@ export class SchedulingDetailComponent {
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
       ),
-      notes: new FormControl(null),
-      vitals: new FormControl(null),
-      bloodOxygenation: new FormControl(null),
-      bpm: new FormControl(null),
-
-      status: new FormControl(false),
     });
 
     if (formData.mode === DataMode.view || formData.mode === DataMode.edit) {
@@ -136,19 +132,15 @@ export class SchedulingDetailComponent {
       this.formGroup.patchValue({
         ...scheduling,
       } as Scheduling);
+    } else {
+      const date = this.dateService.getDate();
+      this.formGroup.patchValue({ date: date, time: date });
     }
   }
 
   editAppointment() {
     let scheduling = this.formGroup.getRawValue();
 
-    const hour = scheduling.time?.getHours() as number;
-    const minute = scheduling.time?.getMinutes();
-    const timestamp = scheduling.date?.setHours(hour, minute, 0, 0) as number;
-    scheduling.date = new Date(timestamp);
-
-    console.log(scheduling);
-
     if (scheduling.id === null) {
       this.schedulingService.add(scheduling);
     } else {
@@ -156,58 +148,9 @@ export class SchedulingDetailComponent {
     }
 
     this.router.navigate(['/scheduling']);
-  }
-
-  endAppointment() {
-    this.formGroup.patchValue({ status: true });
-    let scheduling = this.formGroup.getRawValue();
-    console.log(scheduling);
-    if (scheduling.id === null) {
-      this.schedulingService.add(scheduling);
-    } else {
-      this.schedulingService.update(scheduling);
-    }
-
-    this.router.navigate(['/scheduling']);
-  }
-
-  finishScheduling(event: any) {
-    this.isSchedulingFinished = event;
-  }
-
-  open(): void {
-    this.visible = true;
-  }
-
-  close(): void {
-    this.visible = false;
-  }
-
-  selectProtocol(protocol: any): void {
-    const previousSteps = this.formGroup.controls.notes?.value;
-
-    if (previousSteps) {
-      this.formGroup.patchValue({
-        notes: `${previousSteps} \n${protocol.steps}`,
-      });
-    } else {
-      this.formGroup.patchValue({
-        notes: `${protocol.steps}`,
-      });
-    }
-
-    this.notification.blank(
-      protocol.name,
-      'Protocolo adicionado ao campo Evolução com sucesso!',
-      { nzDuration: 5000 }
-    );
   }
 
   back() {
     this.router.navigate(['scheduling']);
-  }
-
-  getWidthScreen() {
-    return window.innerWidth < 990 ? window.innerWidth : 375;
   }
 }

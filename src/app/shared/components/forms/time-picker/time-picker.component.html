@@ -5,6 +5,7 @@
         class="mb-3"
         [formControlName]="controlName"
         [nzPlaceHolder]="placeholder"
+        [nzMinuteStep]="60"
         nzFormat="HH:mm"
         (change)="valueChanged()"
         [ngClass]="{

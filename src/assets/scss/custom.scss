@@ -20,7 +20,18 @@
       color: $neutral12;
       a {
         &:hover {
-          color: $neutral11;
+          color: $neutral7;
+        }
+      }
+
+      &.actions {
+        span {
+          font-size: 1.125rem;
+          &:hover {
+            &.delete {
+              color: $dustRed6;
+            }
+          }
         }
       }
     }
@@ -37,5 +48,13 @@
   }
   .ant-table-tbody > tr > td {
     // border-bottom: none;
+  }
+}
+
+span.anticon {
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  &:hover {
+    color: #1890ff;
   }
 }

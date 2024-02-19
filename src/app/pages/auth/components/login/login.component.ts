@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  register() {
+    this.router.navigate(['/auth/register']);
+  }
+
   login() {
     const { value: formGroupValue } = this.formGroup;
 

@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Physioterapist } from '@app/shared/interfaces/physioterapist.interface';
 import { PhysioterapistService } from '../../services/physioterapist.service';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
+import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 
 @Component({
   standalone: true,
@@ -26,6 +27,7 @@ import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-pan
     ButtonComponent,
     NgIf,
     BackSubmitPanelComponent,
+    DatePickerComponent,
   ],
   templateUrl: './physioterapist-details.component.html',
   styleUrl: './physioterapist-details.component.scss',
@@ -51,6 +53,9 @@ export class PhysioterapistDetailsComponent {
         disabled: this.mode === DataMode.edit,
       }),
       name: new FormControl({ value: null, disabled: false }, [
+        Validators.required,
+      ]),
+      birthDate: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
     });

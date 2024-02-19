@@ -1,3 +1,5 @@
+@import "variables";
+
 :host {
   ::ng-deep .scheduling-info {
     span {
@@ -6,5 +8,123 @@
         margin-right: 0.5rem;
       }
     }
+  }
+
+  .scheduling-wraper {
+    overflow: auto;
+    max-height: 600px;
+    padding: 5px;
+    margin: 5px;
+
+    .hour-line {
+      display: flex;
+      border-bottom: 1px dashed $neutral4;
+      // padding: 1rem;
+      .clock {
+        min-width: 65px;
+        padding: 1.75rem 0.5rem;
+        span {
+          margin-right: 0.5rem;
+          font-weight: 600;
+        }
+      }
+      .has-appointment {
+        // background-color: green;
+        // display: flex;
+        flex: 1;
+        // align-items: center;
+      }
+    }
+    .appointment {
+      height: 100%;
+      border-radius: 8px;
+      color: white;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease-in-out;
+      .appointment-actions {
+        span {
+          cursor: pointer;
+          margin-right: 0.5rem;
+          font-size: 1.25rem;
+        }
+      }
+
+      .doctor-info,
+      .patient-info {
+        cursor: pointer;
+      }
+      .doctor-info {
+        span {
+          font-weight: 600;
+          color: $neutral12;
+          transition: ease-in-out 0.2s;
+        }
+      }
+
+      .patient-info {
+        span {
+          color: $neutral12;
+          transition: ease-in-out 0.2s;
+        }
+      }
+      // background-color: #0aaf60;
+      &.agendado {
+        background-color: $sunriseYellow6;
+        .appointment-actions {
+          #edit,
+          #end-appointment {
+            color: $neutral12;
+            &:hover {
+              color: $neutral7;
+            }
+          }
+        }
+        .doctor-info,
+        .patient-info {
+          &:hover {
+            span {
+              color: $neutral7;
+            }
+          }
+        }
+      }
+
+      &.past {
+        background-color: $polarGreen6;
+
+        .doctor-info,
+        .patient-info {
+          span {
+            color: $neutral2;
+          }
+
+          &:hover {
+            span {
+              color: $neutral7;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .new-appointment {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 1.5rem;
+  }
+
+  .example {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 30px 50px;
+    margin: 20px 0;
   }
 }

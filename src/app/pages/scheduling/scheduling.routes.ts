@@ -22,12 +22,7 @@ export const APPOINTMENTS_ROUTES: Routes = [
     resolve: { formData: SchedulingResolver },
     data: { mode: DataMode.edit },
   },
-  {
-    path: 'appointment/:id',
-    component: SchedulingDetailComponent,
-    resolve: { formData: SchedulingResolver },
-    data: { mode: DataMode.view },
-  },
+
   {
     path: 'create',
     component: SchedulingDetailComponent,

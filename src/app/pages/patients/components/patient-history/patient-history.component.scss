@@ -1,18 +1,45 @@
-:host {
+@import "variables";
 
-    p, h3 {
-        margin: 0;
+:host {
+  p,
+  h3 {
+    margin: 0;
+  }
+  .patient-info {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    cursor: pointer;
+    h4 {
+      transition: 0.3s ease-in-out;
     }
-    .procedure-wrapper {
-        margin-bottom: 1rem;
+
+    &:hover {
+      span,
+      h4 {
+        color: $secondary;
+      }
     }
-    .procedure-info {
-        display: flex;
-        align-items: center;
-        margin-left: 1rem;
-       
-        span {
-            margin-right: 0.5rem;
-        }
+    span {
+      margin-right: 0.5rem;
     }
+  }
+  .procedure-wrapper {
+    margin-bottom: 1rem;
+    display: flex;
+    .appointment-details {
+    }
+  }
+  .procedure-info {
+    align-items: center;
+    margin-left: 1rem;
+    display: flex;
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+
+  // .see-details {
+  //   margin-left: 1rem;
+  // }
 }

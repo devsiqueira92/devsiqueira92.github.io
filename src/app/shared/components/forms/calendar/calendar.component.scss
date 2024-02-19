@@ -1,79 +1,76 @@
+@import "variables";
+
 :host {
-    .events {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        max-height: 110px;
-        li {
-          padding: 0 0.5rem;
-          &:hover {
-           background-color: red;
-          }
-        }
-        
-      }
-
-      .events .ant-badge-status {
-        overflow: hidden;
-        white-space: nowrap;
-        width: 100%;
-        text-overflow: ellipsis;
-        font-size: 12px;
-      }
-
-     
-      .notes-month {
-        text-align: center;
-        font-size: 28px;
-      }
-
-      .notes-month section {
-        font-size: 28px;
-      }
-
-      ::ng-deep .ant-picker-cell-in-view.ant-picker-cell-selected {
-        .active {
-          background: initial;
-        }
-
-      }
-
-      .active {
-        background-color: green;
-        color: white;
-        border-radius: 2px;
-      }
-
-      .full {
+  .events {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 110px;
+    li {
+      padding: 0 0.5rem;
+      &:hover {
         background-color: red;
-        color: white;
-        border-radius: 2px;
       }
+    }
+  }
 
+  .events .ant-badge-status {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
 
-      // ::ng-deep {
-      //   table {
-      //     tbody {
-      //       tr {
-      //         vertical-align: baseline;
-      //         height: 170px;
-      //         td {
-      //           .ant-picker-calendar-date  {
-      //             .ant-picker-calendar-date-content {
-      //               height: 100%;
+  .notes-month {
+    text-align: center;
+    font-size: 28px;
+  }
 
-                    
-      //             }
-      //           }
-                
-      //         }
-              
-      //       }
-      //     }
-      //   }
-      // }
+  .notes-month section {
+    font-size: 28px;
+  }
 
-      ::ng-deep .ant-picker-calendar-mode-switch  {
-        display: none;
-      }
+  ::ng-deep .ant-picker-cell-in-view.ant-picker-cell-selected {
+    .active {
+      background: initial;
+    }
+  }
+
+  .active {
+    background-color: $polarGreen6;
+    color: $neutral1;
+    border-radius: 2px;
+  }
+
+  .full {
+    background-color: $dustRed6;
+    color: $neutral1;
+    border-radius: 2px;
+  }
+
+  // ::ng-deep {
+  //   table {
+  //     tbody {
+  //       tr {
+  //         vertical-align: baseline;
+  //         height: 170px;
+  //         td {
+  //           .ant-picker-calendar-date  {
+  //             .ant-picker-calendar-date-content {
+  //               height: 100%;
+
+  //             }
+  //           }
+
+  //         }
+
+  //       }
+  //     }
+  //   }
+  // }
+
+  ::ng-deep .ant-picker-calendar-mode-switch {
+    display: none;
+  }
 }

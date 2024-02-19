@@ -1,1 +1,119 @@
-<p>medical-appointment-details works!</p>
+<form nz-form [formGroup]="formGroup" nz-row [nzGutter]="16">
+  <div nz-col [nzSpan]="24" *ngIf="scheduling$ | async as scheduling">
+    <nz-descriptions nzTitle="Dados do paciente">
+      <nz-descriptions-item nzTitle="Nome">
+        {{ scheduling.patient.name }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Telefone">
+        {{ scheduling.patient.phone }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Data de Nascimento">
+        {{ scheduling.patient.birthDate | date : "dd/MM/yyyy" }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Data de atendimento">
+        {{ scheduling.date | date : "dd/MM/yyyy hh:mm" }}
+      </nz-descriptions-item>
+
+      <nz-descriptions-item nzTitle="Atendido por">
+        {{ scheduling.doctor.name }}
+      </nz-descriptions-item>
+
+      <!-- <nz-descriptions-item nzTitle="Tipo de consulta">
+        {{ scheduling.type.type }}
+      </nz-descriptions-item> -->
+    </nz-descriptions>
+  </div>
+
+  <div nz-col [nzSpan]="24">
+    <nz-divider nzType="horizontal"></nz-divider>
+    <h3>Detalhes da consulta</h3>
+    <div class="scheduling-details-form" nz-row [nzGutter]="16">
+      <div [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }" nz-col>
+        <app-input
+          [placeholder]="'Oxigenacão sanguinea'"
+          controlName="bloodOxygenation"
+          [parentForm]="formGroup"
+          type="text"
+        ></app-input>
+
+        <app-input
+          [placeholder]="'Pressão arterial'"
+          controlName="bloodPressure"
+          [parentForm]="formGroup"
+          type="text"
+        ></app-input>
+
+        <app-input
+          [placeholder]="'Batimentos p/ minuto'"
+          controlName="bpm"
+          [parentForm]="formGroup"
+          type="text"
+        ></app-input>
+      </div>
+
+      <app-text-area
+        [placeholder]="'Outros detalhes'"
+        controlName="details"
+        [parentForm]="formGroup"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 12 }"
+      ></app-text-area>
+
+      <nz-divider nzType="horizontal"></nz-divider>
+      <app-text-area
+        [placeholder]="'Evolução'"
+        controlName="evolution"
+        [parentForm]="formGroup"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 20 }"
+      ></app-text-area>
+
+      <div
+        id="protocols-button"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 4 }"
+      >
+        <app-button
+          label="Protocolos"
+          icon="left"
+          (click)="open()"
+        ></app-button>
+      </div>
+    </div>
+
+    <app-back-submit-panel
+      (back)="back()"
+      (submit)="submit()"
+      [disabled]="
+        !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+      "
+    ></app-back-submit-panel>
+  </div>
+</form>
+
+<nz-drawer
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="Lista de protocolos"
+  [nzFooter]="footerTpl"
+  (nzOnClose)="close()"
+  [nzWidth]="getWidthScreen()"
+>
+  <ng-container *nzDrawerContent>
+    <ul class="protocol-list">
+      <li
+        *ngFor="let item of procedureList$ | async"
+        (click)="selectProtocol(item)"
+      >
+        <span nz-icon nzType="caret-left" nzTheme="outline"></span>
+        {{ item.name }}
+      </li>
+    </ul>
+  </ng-container>
+</nz-drawer>
+<ng-template #footerTpl>
+  <app-button label="Fechar" (click)="close()"></app-button>
+</ng-template>
