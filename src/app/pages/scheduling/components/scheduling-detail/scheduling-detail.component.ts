@@ -29,12 +29,9 @@ import { SwitchComponent } from '@app/shared/components/forms/switch/switch.comp
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 import { TimePickerComponent } from '@app/shared/components/forms/time-picker/time-picker.component';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
-import {
-  NzNotificationModule,
-  NzNotificationService,
-} from 'ng-zorro-antd/notification';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AppointmentDateService } from '@app/shared/services/appointment-date.service';
+import { LinkButtonComponent } from '@app/shared/components/link-button/link-button.component';
 
 @Component({
   standalone: true,
@@ -52,8 +49,8 @@ import { AppointmentDateService } from '@app/shared/services/appointment-date.se
     DatePickerComponent,
     TimePickerComponent,
     BackSubmitPanelComponent,
-    NzNotificationModule,
     NzDividerModule,
+    LinkButtonComponent,
   ],
   templateUrl: './scheduling-detail.component.html',
   styleUrl: './scheduling-detail.component.scss',
@@ -73,7 +70,6 @@ export class SchedulingDetailComponent {
     private patientService: PatientService,
     private physioterapistService: PhysioterapistService,
     private router: Router,
-    private notification: NzNotificationService,
     private dateService: AppointmentDateService
   ) {}
 

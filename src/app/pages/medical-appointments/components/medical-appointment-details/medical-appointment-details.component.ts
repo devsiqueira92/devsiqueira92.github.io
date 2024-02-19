@@ -132,7 +132,7 @@ export class MedicalAppointmentDetailsComponent {
     this.notification.blank(
       protocol.name,
       'Protocolo adicionado ao campo Evolução com sucesso!',
-      { nzDuration: 5000 }
+      { nzDuration: 5000, nzPlacement: 'topLeft' }
     );
   }
 

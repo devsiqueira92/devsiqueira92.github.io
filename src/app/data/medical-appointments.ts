@@ -55,7 +55,8 @@ export let MedicalAppointments = [
     bloodPressure: '120 x 80',
     bloodOxygenation: '95%',
     details: 'very long, long, long content',
-    evolution: 'steps of patient evolution',
+    evolution:
+      ' steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution  steps of patient evolution ',
   },
 
   {

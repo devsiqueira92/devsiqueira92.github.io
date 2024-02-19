@@ -12,7 +12,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 })
 export class AddAppointmentButtonComponent {
   @Input() time: any;
-
+  currentDate = new Date();
+  selectedDate: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -20,9 +21,9 @@ export class AddAppointmentButtonComponent {
   ) {}
 
   newAppointment(hora: number) {
-    const selectedDate = this.route.snapshot.paramMap.get('date');
+    this.selectedDate = this.route.snapshot.paramMap.get('date');
 
-    const dateWithTime = new Date(`${selectedDate}, ${hora}:00`);
+    const dateWithTime = new Date(`${this.selectedDate}, ${hora}:00`);
     console.log(dateWithTime);
 
     this.appointmentDate.setDate(dateWithTime);

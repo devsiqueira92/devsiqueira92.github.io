@@ -1,0 +1,31 @@
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
+<ng-container *ngIf="appointmentDetails$ | async as details; else loading">
+  <nz-descriptions nzTitle="Detalhes" nzLayout="vertical">
+    <nz-descriptions-item nzTitle="Batimentos por minuto">
+      {{ details.bpm }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Pressão arterial">
+      {{ details.bloodPressure }}
+    </nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="Oxigenação sanguinea">
+      {{ details.bloodOxygenation }}
+    </nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="Detalhes" [nzSpan]="3">
+      {{ details.details }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Evolução" [nzSpan]="3">
+      {{ details.evolution }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+
+  <app-button
+    label="Fechar"
+    (click)="close()"
+    type="secondary"
+    backButton
+  ></app-button>
+</ng-container>

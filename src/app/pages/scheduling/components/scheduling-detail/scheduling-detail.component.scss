@@ -1,4 +1,10 @@
 :host {
+  .patient-dropdown {
+    display: flex;
+    app-select {
+      flex: 1;
+    }
+  }
   .edit-appointment {
     text-align: right;
   }

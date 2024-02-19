@@ -1,45 +1,52 @@
-<form nz-form [formGroup]="formGroup">
-  <app-input
-    *ngIf="mode === 'edit'"
-    [placeholder]="'Id'"
-    controlName="id"
-    [parentForm]="formGroup"
-    type="text"
-  ></app-input>
+<section>
+  <header>
+    <h3 *ngIf="mode === 'create'">Novo paciente</h3>
+    <h3 *ngIf="mode === 'edit'">Editar paciente</h3>
+  </header>
 
-  <app-input
-    [placeholder]="'Name'"
-    controlName="name"
-    [parentForm]="formGroup"
-    type="text"
-  ></app-input>
+  <form nz-form [formGroup]="formGroup">
+    <app-input
+      *ngIf="mode === 'edit'"
+      [placeholder]="'Id'"
+      controlName="id"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
 
-  <app-input
-    [placeholder]="'Contato'"
-    controlName="phone"
-    [parentForm]="formGroup"
-    type="text"
-  ></app-input>
+    <app-input
+      [placeholder]="'Name'"
+      controlName="name"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
 
-  <app-input
-    [placeholder]="'Endereço'"
-    controlName="address"
-    [parentForm]="formGroup"
-    type="text"
-  ></app-input>
+    <app-input
+      [placeholder]="'Contato'"
+      controlName="phone"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
 
-  <app-date-picker
-    [placeholder]="'Data de nascimento'"
-    controlName="birthDate"
-    [parentForm]="formGroup"
-    type="text"
-  ></app-date-picker>
+    <app-input
+      [placeholder]="'Endereço'"
+      controlName="address"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
 
-  <app-back-submit-panel
-    (submit)="submit()"
-    (back)="back()"
-    [disabled]="
-      !formGroup.valid || formGroup.controls.isSubmitting?.value === true
-    "
-  ></app-back-submit-panel>
-</form>
+    <app-date-picker
+      [placeholder]="'Data de nascimento'"
+      controlName="birthDate"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-date-picker>
+
+    <app-back-submit-panel
+      (submit)="submit()"
+      (back)="back()"
+      [disabled]="
+        !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+      "
+    ></app-back-submit-panel>
+  </form>
+</section>

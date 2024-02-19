@@ -13,6 +13,7 @@
 
         <div nz-row [nzGutter]="16">
           <div
+            class="patient-dropdown"
             *ngIf="patientList$ | async as patients"
             nz-col
             [nzXs]="{ span: 24 }"
@@ -25,6 +26,10 @@
               [hasFloatingLabel]="false"
               [options]="patients"
             ></app-select>
+            <app-link-button
+              path="/patients/create"
+              icon="plus"
+            ></app-link-button>
           </div>
 
           <div

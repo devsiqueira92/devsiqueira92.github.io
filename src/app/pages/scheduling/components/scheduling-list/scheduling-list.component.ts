@@ -7,24 +7,23 @@ import { LinkButtonComponent } from '@app/shared/components/link-button/link-but
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+
 import { AccessControlDirective } from '@app/shared/directives/access-control.directive';
 import { AddAppointmentButtonComponent } from '@app/shared/components/add-appointment-button/add-appointment-button.component';
+import { LoadingComponent } from '@app/shared/components/loading/loading.component';
 
 @Component({
-  selector: 'app-scheduling-list',
   standalone: true,
   imports: [
     CommonModule,
     LinkButtonComponent,
     NzCardModule,
     NzIconModule,
-    NzSpinModule,
     NzGridModule,
     RouterModule,
-
     AccessControlDirective,
     AddAppointmentButtonComponent,
+    LoadingComponent,
   ],
   templateUrl: './scheduling-list.component.html',
   styleUrl: './scheduling-list.component.scss',
