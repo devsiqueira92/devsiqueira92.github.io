@@ -1,0 +1,169 @@
+@import "mixins";
+
+p,
+ul,
+ol,
+li,
+span {
+  @include font-play;
+}
+h1 {
+  @include font-play;
+  font-size: 4rem; /* 64px */
+}
+h2 {
+  @include font-play;
+  font-size: 1.875rem; /* 30px */
+}
+h3 {
+  @include font-play;
+  font-size: 1.5rem; /* 24px */
+}
+h4 {
+  @include font-play;
+  font-size: 1.25rem; /* 20px */
+}
+
+/*
+  RoyalGuard Global styles
+*/
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  // @include font-play;
+}
+
+/*  Common styles */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+body {
+  font-size: 16px; /* Don't change this fixed size once its the standard for text size on the web */
+  background: $neutral1;
+  color: $neutral12;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $neutral12;
+
+  &:hover {
+    color: $primary-hover;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/////////////////////////////////////////////
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+// .smoke-effect {
+//   background: linear-gradient(180deg, rgba(53, 55, 67, 0) 53%, #1b1c22 108.95%);
+// }
+
+// .dark-background-smoke {
+//   background: linear-gradient(180deg, rgba(53, 55, 67, 0) 9%, #1b1c22 27.95%);
+// }
+
+// .light-smoke-effect {
+//   background: linear-gradient(180deg, rgba(1, 1, 1, 0) 7.96%, #111113 100%);
+//   opacity: 0.8;
+//   height: 190px;
+//   width: 100%;
+// }
+
+.offscreen {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px); /* for Internet Explorer */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.screen-reader-txt {
+  @include screen-reader-txt;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+/* ------------------------------------------------------------ */
+// Beautiful scrollbar
+/* ------------------------------------------------------------ */
+
+/* scrollbar custom */
+// ::-webkit-scrollbar {
+//   width: 5px;
+//   height: 5px;
+// }
+
+/* Track */
+// ::-webkit-scrollbar-track {
+//   background: $neutral11;
+// }
+
+/* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: $neutral10;
+//   border-radius: 4px;
+// }
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: $neutral9;
+// }
+
+::-webkit-scrollbar-corner {
+  width: 0;
+}
+
+.simple-dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+
+  &.small {
+    height: 5px;
+    width: 5px;
+  }
+}
