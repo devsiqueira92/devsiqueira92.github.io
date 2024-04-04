@@ -17,6 +17,13 @@ export const MEDICAL_APPOINTMENTS_ROUTES: Routes = [
   },
 
   {
+    path: 'view/:id',
+    component: MedicalAppointmentDetailsComponent,
+    resolve: { formData: MedicalAppointmentsResolver },
+    data: { mode: DataMode.view },
+  },
+
+  {
     path: 'create/:id',
     component: MedicalAppointmentDetailsComponent,
     resolve: { formData: MedicalAppointmentsResolver },

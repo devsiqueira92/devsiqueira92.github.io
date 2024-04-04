@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputComponent } from '@app/shared/components/forms/input/input.component';
+import { SelectComponent } from '@app/shared/components/forms/select/select.component';
 import { UploadComponent } from '@app/shared/components/forms/upload/upload.component';
 import { LinkButtonComponent } from '@app/shared/components/link-button/link-button.component';
 import { RegisterForm } from '@app/shared/interfaces/register-form.interface';
@@ -20,6 +21,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     InputComponent,
     UploadComponent,
     LinkButtonComponent,
+    SelectComponent,
     NzGridModule,
   ],
   templateUrl: './register.component.html',
@@ -27,6 +29,12 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 })
 export class RegisterComponent implements OnInit {
   formGroup: FormGroup<RegisterForm>;
+  accountType$ = [
+    {
+      label: 'Profissional',
+      value: '3',
+    },
+  ];
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -35,16 +43,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup<RegisterForm>({
-      name: new FormControl({ value: null, disabled: false }, [
+      email: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      address: new FormControl({ value: null, disabled: false }, [
+      password: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      phone: new FormControl({ value: null, disabled: false }, [
+      confirmPassword: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      identificationNumber: new FormControl({ value: null, disabled: false }),
+      accountType: new FormControl({ value: null, disabled: false }),
     });
   }
 

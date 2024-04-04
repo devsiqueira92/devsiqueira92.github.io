@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { ProcedureService } from './services/procedure.service';
 import { AccessControlDirective } from '@app/shared/directives/access-control.directive';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { RolesEnum } from '@app/shared/enums/roles.enum';
 
 @Component({
   standalone: true,
@@ -25,7 +26,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 })
 export class ProceduresComponent {
   listOfData$: Observable<any>;
-
+  roles = RolesEnum;
   constructor(private proceduresService: ProcedureService) {}
 
   ngOnInit(): void {

@@ -18,6 +18,10 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { NgIf } from '@angular/common';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
+import { ClinicPatientService } from '@app/shared/services/clinic-patient.service';
+import { AuthenticationService } from '@app/shared/services/authentication.service';
+import { map, of, switchMap, tap } from 'rxjs';
+import { ProfessionalPatientService } from '@app/shared/services/professional-patient.service';
 
 @Component({
   standalone: true,
@@ -38,6 +42,9 @@ export class PatientDetailsComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private patientService: PatientService,
+    private clinicPatientService: ClinicPatientService,
+    private professionalPatientService: ProfessionalPatientService,
+    private authenticationService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -54,13 +61,15 @@ export class PatientDetailsComponent implements OnInit {
       name: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      phone: new FormControl({ value: null, disabled: false }, [
+      contact: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      address: new FormControl({ value: null, disabled: false }, [
-        Validators.required,
-      ]),
+
       birthDate: new FormControl({ value: null, disabled: false }, [
+        Validators.required,
+      ]),
+
+      identificationNumber: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
     });
@@ -77,13 +86,31 @@ export class PatientDetailsComponent implements OnInit {
 
   submit() {
     const patient = this.formGroup.getRawValue();
-    if (patient.id === null) {
-      this.patientService.add(patient);
-    } else {
-      this.patientService.update(patient);
-    }
+    const stringDate: any = patient.birthDate;
+    patient.birthDate = new Date(stringDate).toISOString().substring(0, 10);
 
-    this.router.navigate(['/patients']);
+    if (patient.id === null) {
+      // this.clinicPatientService
+      //   .add(patient)
+      //   .subscribe(() => this.router.navigate(['/patients']));
+
+      this.authenticationService.token$
+        .pipe(
+          switchMap((token: any) => of(token.accType)),
+          switchMap((accountType: string) => {
+            if (accountType === 'Clinic') {
+              return this.clinicPatientService.add(patient);
+            }
+
+            return this.professionalPatientService.add(patient);
+          })
+        )
+        .subscribe(() => this.router.navigate(['/patients']));
+    } else {
+      this.patientService
+        .update(patient)
+        .subscribe(() => this.router.navigate(['/patients']));
+    }
   }
 
   back() {

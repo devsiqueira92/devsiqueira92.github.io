@@ -1,0 +1,19 @@
+<ng-container *ngIf="searchResult$ | async as result">
+  <nz-descriptions nzTitle="Adicionar paciente" nzLayout="horizontal">
+    <nz-descriptions-item nzTitle="Nome">
+      {{ result.name }}
+    </nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="Data de nascimento" [nzSpan]="3">
+      {{ result.birthDate }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Documento">
+      {{ result.identificationNumber }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Contato" [nzSpan]="3">
+      {{ result.contact }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+
+  <button (click)="addToClinic(result)">Adicionar</button>
+</ng-container>

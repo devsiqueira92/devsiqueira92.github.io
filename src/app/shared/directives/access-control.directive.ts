@@ -8,7 +8,7 @@ import { AuthenticationService } from '../services/authentication.service';
   selector: '[accessControl]',
 })
 export class AccessControlDirective implements OnInit, OnDestroy {
-  @Input('moduleType') moduleType: string;
+  @Input('moduleType') moduleType: string[];
 
   private subs = new SubSink();
   private initialDisplay: string;
@@ -19,9 +19,13 @@ export class AccessControlDirective implements OnInit, OnDestroy {
 
     this.subs.sink = this.auth.token$
       .pipe(
-        tap((token) => {
-          this.el.nativeElement.style.display =
-            token === this.moduleType ? this.initialDisplay : 'none';
+        tap((token: any) => {
+          if (token)
+            this.el.nativeElement.style.display = this.moduleType.includes(
+              token.accType
+            )
+              ? this.initialDisplay
+              : 'none';
         })
       )
       .subscribe();

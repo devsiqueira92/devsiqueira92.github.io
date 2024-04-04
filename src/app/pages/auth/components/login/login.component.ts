@@ -61,26 +61,26 @@ export class LoginComponent implements OnInit {
           //   // this.auth.rememberMe(formGroupValue.username);
           // }
           // this.modal.close();
-        }),
-        catchError((error) => {
-          switch (error.status) {
-            case 400:
-              // this block should never execute after aligning with backend validators
-              this.errorCode = 400;
-              // this.ref.markForCheck();
-              return EMPTY;
-            case 401:
-              this.loginInput = formGroupValue;
-              // this.currentStep$.next(AuthStep.Twofa);
-              return EMPTY;
-            case 403:
-              this.errorCode = 403;
-              // this.ref.markForCheck();
-              return EMPTY;
-            default:
-              return throwError(() => error);
-          }
         })
+        // catchError((error) => {
+        //   switch (error.status) {
+        //     case 400:
+        //       // this block should never execute after aligning with backend validators
+        //       this.errorCode = 400;
+        //       // this.ref.markForCheck();
+        //       return EMPTY;
+        //     case 401:
+        //       this.loginInput = formGroupValue;
+        //       // this.currentStep$.next(AuthStep.Twofa);
+        //       return EMPTY;
+        //     case 403:
+        //       this.errorCode = 403;
+        //       // this.ref.markForCheck();
+        //       return EMPTY;
+        //     default:
+        //       return throwError(() => error);
+        //   }
+        // })
       )
       .subscribe(() => this.router.navigate(['scheduling']));
   }

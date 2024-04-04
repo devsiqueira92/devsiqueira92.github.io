@@ -5,14 +5,18 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { Location } from '@angular/common';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private location: Location
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,11 +28,23 @@ export class RoleGuard implements CanActivate {
     | UrlTree {
     const allowedRoles = next.data.roles as Array<string>;
 
-    if (this.authService.getRole(allowedRoles)) {
+    let hasPermission = false;
+
+    this.authService.token$
+      .pipe(
+        tap((token: any) => {
+          hasPermission = allowedRoles.includes(token.accType);
+        })
+      )
+      .subscribe();
+
+    if (hasPermission) {
       return true;
     } else {
       // Redirect or handle unauthorized access
       console.log('Você não tem permissão para acessar está página');
+
+      this.location.back();
       return false;
     }
   }

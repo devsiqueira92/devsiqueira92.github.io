@@ -6,11 +6,12 @@ import { MedicalAppointment } from '@app/shared/interfaces/medical-appointment.i
 interface MedicalAppointmentForm extends FormIsSubmiting {
   id?: FormControl<string | null>;
   schedulingId?: FormControl<string | null>;
-  bpm?: FormControl<string | null>;
+  beatsPerMinute?: FormControl<string | null>;
   bloodOxygenation?: FormControl<string | null>;
   bloodPressure?: FormControl<string | null>;
-  details?: FormControl<string | null>;
+  notes?: FormControl<string | null>;
   evolution?: FormControl<string | null>;
+  weight?: FormControl<string | null>;
   status?: FormControl<boolean | null>;
 }
 

@@ -2,84 +2,97 @@
   <div class="scheduling-wraper">
     <div *ngFor="let hora of horas" class="hour-line">
       <div class="clock">
-        <!-- <span nz-icon nzType="clock-circle" nzTheme="outline"></span> -->
         <span>{{ hora }}:00</span>
       </div>
       <span class="has-appointment">
         <ng-container
           *ngTemplateOutlet="
-            eventosPorHora[hora] ? hasAppointment : newAppointment;
+            hasAppointment;
             context: { $implicit: eventosPorHora[hora] || hora }
           "
         >
         </ng-container>
       </span>
+      <span *ngIf="enableAddingButton">
+        <div class="new-appointment">
+          <app-add-appointment-button
+            [time]="hora"
+          ></app-add-appointment-button>
+        </div>
+      </span>
     </div>
   </div>
 
-  <ng-template #newAppointment let-evento>
-    <!-- evento === hora -->
-    <div class="new-appointment">
-      <!-- <div class="icon" (click)="newAppointment()">
-        <span nz-icon nzType="plus" nzTheme="outline"></span>
-      </div> -->
-      <app-add-appointment-button [time]="evento"></app-add-appointment-button>
-    </div>
-  </ng-template>
-
   <ng-template #hasAppointment let-evento>
-    <div
-      class="appointment"
-      [ngClass]="{
-        agendado: evento.date > currentDate,
-        past: evento.date < currentDate
-      }"
-    >
-      <div class="appointment-details">
-        <div class="doctor-info">
-          <span [routerLink]="'/physioterapists/edit/' + evento.id"
-            >Dr. {{ evento.doctor.name }}</span
+    <div class="appointment-list">
+      <div
+        class="appointment-info"
+        [ngClass]="getAppointmentClass(item.schedulingStatus, evento.date)"
+        *ngFor="let item of evento.schedulings"
+      >
+        <div class="appointment">
+          <div class="appointment-details">
+            <div class="doctor-info">
+              <span>Dr. {{ item.professionalName }}</span>
+            </div>
+
+            <div class="patient-info">
+              <span [routerLink]="'/patients/edit/' + item.id">
+                {{ item.patientName }}
+              </span>
+            </div>
+          </div>
+          <div
+            class="appointment-actions"
+            *ngIf="item.schedulingStatus === 'Agendado'; else viewAppointment"
           >
+            <span
+              id="edit"
+              nz-icon
+              nzType="edit"
+              nzTheme="outline"
+              [routerLink]="'/scheduling/edit/' + item.id"
+            ></span>
+
+            <span
+              id="end-appointment"
+              nz-icon
+              nzType="check"
+              nzTheme="outline"
+              [routerLink]="'/medical-appointments/create/' + item.id"
+            ></span>
+          </div>
         </div>
 
-        <div class="patient-info">
-          <!-- <span nz-icon nzType="user" nzTheme="outline"></span> -->
-          <span [routerLink]="'/patients/edit/' + evento.id">{{
-            evento.patient.name
-          }}</span>
-        </div>
-      </div>
-      <div
-        class="appointment-actions"
-        *ngIf="evento.date > currentDate; else viewAppointment"
-      >
-        <!-- <span nz-icon nzType="close" nzTheme="outline"></span> -->
-        <span
-          id="edit"
-          nz-icon
-          nzType="edit"
-          nzTheme="outline"
-          [routerLink]="'/scheduling/edit/' + evento.id"
-        ></span>
-        <span
-          id="end-appointment"
-          nz-icon
-          nzType="check"
-          nzTheme="outline"
-          [routerLink]="'/medical-appointments/create/' + evento.id"
-        ></span>
+        <ng-template #viewAppointment>
+          <!-- <div
+            class="appointment-actions"
+            *ngIf="item.schedulingStatus === 'Agendado'"
+          >
+            <span
+              id="end-appointment"
+              nz-icon
+              nzType="check"
+              nzTheme="outline"
+              [routerLink]="'/medical-appointments/create/' + item.id"
+            ></span>
+          </div> -->
+
+          <div
+            class="appointment-actions"
+            *ngIf="item.schedulingStatus === 'Finalizado'"
+          >
+            <span
+              id="end-appointment"
+              nz-icon
+              nzType="arrow-right"
+              nzTheme="outline"
+              [routerLink]="'/medical-appointments/edit/' + item.id"
+            ></span>
+          </div>
+        </ng-template>
       </div>
     </div>
-    <ng-template #viewAppointment>
-      <div class="appointment-actions">
-        <span
-          nz-icon
-          nzType="arrow-right"
-          nzTheme="outline"
-          [routerLink]="'/medical-appointments/edit/' + evento.id"
-        ></span>
-      </div>
-    </ng-template>
   </ng-template>
 </ng-container>
 

@@ -7,6 +7,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { PhysioterapistService } from './services/physioterapist.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ClinicProfessionalService } from '@app/shared/services/clinic-professional.service';
 
 @Component({
   standalone: true,
@@ -24,9 +25,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 export class PhysioterapistsComponent {
   listOfData$: Observable<any>;
 
-  constructor(private physioterapistService: PhysioterapistService) {}
+  constructor(
+    private physioterapistService: PhysioterapistService,
+    private clinicProfessionalService: ClinicProfessionalService
+  ) {}
 
   ngOnInit(): void {
-    this.listOfData$ = this.physioterapistService.getList();
+    this.listOfData$ = this.clinicProfessionalService.getList();
   }
 }

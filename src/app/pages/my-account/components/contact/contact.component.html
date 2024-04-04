@@ -1,0 +1,34 @@
+<form nz-form [formGroup]="formGroup">
+  <app-input
+    *ngIf="mode === 'edit'"
+    [placeholder]="'Id'"
+    controlName="id"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-input>
+
+  <app-input
+    [placeholder]="'Tipo'"
+    controlName="type"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-input>
+
+  <app-input
+    [placeholder]="'Contato'"
+    controlName="contact"
+    [parentForm]="formGroup"
+    type="text"
+  ></app-input>
+
+  <div class="submit-btn">
+    <app-button
+      (click)="submit()"
+      [disabled]="
+        !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+      "
+      label="Enviar"
+      icon="check"
+    ></app-button>
+  </div>
+</form>

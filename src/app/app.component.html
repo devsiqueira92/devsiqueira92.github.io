@@ -32,17 +32,35 @@
 
       <li nz-submenu nzTitle="Gerenciamento" nzIcon="setting">
         <ul>
-          <li nz-menu-item routerLink="/patients" nzMatchRouter>
+          <li
+            accessControl
+            [moduleType]="[roles.Professional, roles.Clinic]"
+            nz-menu-item
+            routerLink="/patients"
+            nzMatchRouter
+          >
             <span nz-icon nzType="contacts" nzTheme="outline"></span>
             <span>Pacientes</span>
           </li>
 
-          <li nz-menu-item routerLink="/physioterapists" nzMatchRouter>
+          <li
+            accessControl
+            [moduleType]="[roles.Clinic]"
+            nz-menu-item
+            routerLink="/physioterapists"
+            nzMatchRouter
+          >
             <span nz-icon nzType="team" nzTheme="outline"></span>
             <span>Fisioterapeutas</span>
           </li>
 
-          <li nz-menu-item routerLink="/procedures" nzMatchRouter>
+          <li
+            accessControl
+            [moduleType]="[roles.Professional, roles.Clinic]"
+            nz-menu-item
+            routerLink="/procedures"
+            nzMatchRouter
+          >
             <span nz-icon nzType="exclamation-circle" nzTheme="outline"></span>
             <span>Protocolos</span>
           </li>

@@ -13,9 +13,11 @@ interface SchedulingForm extends FormIsSubmiting {
   bpm?: FormControl<string | null>;
   bloodOxygenation?: FormControl<string | null>;
   notes?: FormControl<string | null>;
+  schedulingTypeId?: FormControl<string | null>;
   status?: FormControl<boolean | null>;
-  patient?: FormControl<string | null>;
-  doctor?: FormControl<Physioterapist | null>;
+  patientId?: FormControl<string | null>;
+  professionalId?: FormControl<string | null>;
+  schedulingStatusId?: FormControl<string | null>;
 }
 
 interface SchedulingFormInput {

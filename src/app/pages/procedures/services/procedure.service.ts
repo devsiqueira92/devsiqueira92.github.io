@@ -1,47 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Procedures } from '@app/data/procedures';
+import { environment } from '@root/src/environments/environment';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProcedureService {
+  procedures = Procedures;
+  rootUrl = environment.baseUrl;
 
-  procedures = Procedures
   constructor(protected httpClient: HttpClient) {}
-  
-  // getList(): Observable<Result<Patient, Metadata>> {
-  //   console.log('getList');
-  //   return this.httpClient
-  //     .get<Result<Patient, Patient>>(`${this.rootUrl}/procedure/`)
-  //     .pipe(map((result: any) => result));
-  // }
 
   getList(): Observable<any> {
-    return of(this.procedures);
-    } 
-
-  // getById(id: string): Observable<PatientFormOutput> {
-  //   return this.httpClient.get<PatientFormOutput>(
-  //     `${this.rootUrl}/procedure/${id}`
-  //   );
-  // }
+    return this.httpClient.get<any>(`${this.rootUrl}/protocol/`, {
+      params: { pageSize: 100 },
+    });
+  }
 
   getById(id: string | null): Observable<any> {
-    const result = this.procedures.find((procedure) => procedure.id === id)
-    return of(result);
+    return this.httpClient.get<any>(`${this.rootUrl}/protocol/${id}`);
   }
 
-  add(procedure: any) {
-    let procedureAdded = { procedure }
-    procedureAdded.procedure.id = (this.procedures.length + 1).toString()
-
-    this.procedures.push(procedureAdded.procedure)
+  add(protocol: any) {
+    return this.httpClient.post<any>(
+      `${this.rootUrl}/protocol/create`,
+      protocol
+    );
   }
 
-  update(procedure: any) {
-    const procedureIndex = this.procedures.findIndex((_procedure) => _procedure.id === procedure.id)
-    this.procedures[procedureIndex] = procedure
+  update(protocol: any) {
+    return this.httpClient.put<any>(
+      `${this.rootUrl}/protocol/update`,
+      protocol
+    );
   }
 }

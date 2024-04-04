@@ -1,47 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Physioterapists } from '@app/data/physioterapists';
+import { environment } from '@root/src/environments/environment';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PhysioterapistService {
+  physioterapists = Physioterapists;
+  rootUrl = environment.baseUrl;
 
-  physioterapists = Physioterapists
   constructor(protected httpClient: HttpClient) {}
-  
-  // getList(): Observable<Result<Patient, Metadata>> {
-  //   console.log('getList');
-  //   return this.httpClient
-  //     .get<Result<Patient, Patient>>(`${this.rootUrl}/physioterapist/`)
-  //     .pipe(map((result: any) => result));
-  // }
 
   getList(): Observable<any> {
-    return of(this.physioterapists);
-    } 
-
-  // getById(id: string): Observable<PatientFormOutput> {
-  //   return this.httpClient.get<PatientFormOutput>(
-  //     `${this.rootUrl}/physioterapist/${id}`
-  //   );
-  // }
+    return this.httpClient.get<any>(`${this.rootUrl}/professional/`);
+  }
 
   getById(id: string | null): Observable<any> {
-    const result = this.physioterapists.find((physioterapist) => physioterapist.id === id)
-    return of(result);
+    return this.httpClient.get<any>(`${this.rootUrl}/professional/${id}`);
   }
 
-  add(physioterapist: any) {
-    let physioterapistAdded = { physioterapist }
-    physioterapistAdded.physioterapist.id = (this.physioterapists.length + 1).toString()
-
-    this.physioterapists.push(physioterapistAdded.physioterapist)
+  add(professional: any) {
+    return this.httpClient.post<any>(
+      `${this.rootUrl}/professional/create`,
+      professional
+    );
   }
 
-  update(physioterapist: any) {
-    const physioterapistIndex = this.physioterapists.findIndex((_physioterapist) => _physioterapist.id === physioterapist.id)
-    this.physioterapists[physioterapistIndex] = physioterapist
+  update(professional: any) {
+    return this.httpClient.put<any>(
+      `${this.rootUrl}/professional/update`,
+      professional
+    );
   }
 }

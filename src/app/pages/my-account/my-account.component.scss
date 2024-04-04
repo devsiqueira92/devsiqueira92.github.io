@@ -1,0 +1,19 @@
+:host {
+  .add-contact-btn {
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+  .contact-panel {
+    justify-content: space-between;
+  }
+
+  .actions {
+    justify-content: center;
+    display: flex;
+    span {
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

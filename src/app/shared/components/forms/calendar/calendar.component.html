@@ -12,9 +12,9 @@
   </nz-calendar> -->
 
 <nz-calendar
-  (nzPanelChange)="panelChange($event)"
   (nzSelectChange)="selectChange($event)"
   [nzFullscreen]="false"
+  [(ngModel)]="date"
 >
   <ul
     *nzDateFullCell="let date"

@@ -2,20 +2,20 @@
   <div nz-col [nzSpan]="24" *ngIf="scheduling$ | async as scheduling">
     <nz-descriptions nzTitle="Dados do paciente">
       <nz-descriptions-item nzTitle="Nome">
-        {{ scheduling.patient.name }}
+        {{ scheduling.patientName }}
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Telefone">
-        {{ scheduling.patient.phone }}
+        {{ scheduling.patientContact }}
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Data de Nascimento">
-        {{ scheduling.patient.birthDate | date : "dd/MM/yyyy" }}
+        {{ scheduling.patientBirthDate | date : "dd/MM/yyyy" }}
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Data de atendimento">
         {{ scheduling.date | date : "dd/MM/yyyy hh:mm" }}
       </nz-descriptions-item>
 
       <nz-descriptions-item nzTitle="Atendido por">
-        {{ scheduling.doctor.name }}
+        {{ scheduling.professionalName }}
       </nz-descriptions-item>
 
       <!-- <nz-descriptions-item nzTitle="Tipo de consulta">
@@ -30,30 +30,43 @@
     <div class="scheduling-details-form" nz-row [nzGutter]="16">
       <div [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }" nz-col>
         <app-input
-          [placeholder]="'Oxigenacão sanguinea'"
+          placeholder="Oxigenacão sanguinea"
           controlName="bloodOxygenation"
           [parentForm]="formGroup"
           type="text"
         ></app-input>
 
         <app-input
-          [placeholder]="'Pressão arterial'"
+          placeholder="Pressão arterial"
           controlName="bloodPressure"
           [parentForm]="formGroup"
           type="text"
         ></app-input>
 
-        <app-input
-          [placeholder]="'Batimentos p/ minuto'"
-          controlName="bpm"
-          [parentForm]="formGroup"
-          type="text"
-        ></app-input>
+        <div nz-row [nzGutter]="16">
+          <div [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }" nz-col>
+            <app-input
+              placeholder="Batimentos p/ minuto"
+              controlName="beatsPerMinute"
+              [parentForm]="formGroup"
+              type="text"
+            ></app-input>
+          </div>
+
+          <div [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }" nz-col>
+            <app-input
+              placeholder="Peso"
+              controlName="weight"
+              [parentForm]="formGroup"
+              type="text"
+            ></app-input>
+          </div>
+        </div>
       </div>
 
       <app-text-area
-        [placeholder]="'Outros detalhes'"
-        controlName="details"
+        [placeholder]="'Notas'"
+        controlName="notes"
         [parentForm]="formGroup"
         nz-col
         [nzXs]="{ span: 24 }"
@@ -71,6 +84,7 @@
       ></app-text-area>
 
       <div
+        *ngIf="mode !== 'view'"
         id="protocols-button"
         nz-col
         [nzXs]="{ span: 24 }"
@@ -85,6 +99,7 @@
     </div>
 
     <app-back-submit-panel
+      *ngIf="mode !== 'view'"
       (back)="back()"
       (submit)="submit()"
       [disabled]="

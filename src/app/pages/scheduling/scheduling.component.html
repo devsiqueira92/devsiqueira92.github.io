@@ -12,7 +12,7 @@
         nz-col
         [nzXs]="{ span: 24 }"
         [nzLg]="{ span: 8 }"
-        *ngIf="events$ | async as events"
+        *ngIf="events$ | async as events; else loading"
       >
         <app-calendar
           [events]="events"
@@ -31,3 +31,6 @@
     </div>
   </div>
 </section>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

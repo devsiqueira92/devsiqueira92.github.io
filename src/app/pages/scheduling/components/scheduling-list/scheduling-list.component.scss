@@ -23,6 +23,8 @@
       .clock {
         min-width: 65px;
         padding: 1.75rem 0.5rem;
+        display: flex;
+        align-items: center;
         span {
           margin-right: 0.5rem;
           font-weight: 600;
@@ -33,11 +35,93 @@
         // display: flex;
         flex: 1;
         // align-items: center;
+
+        .appointment-list {
+          display: flex;
+          height: 100%;
+          flex-wrap: wrap;
+          .appointment-info {
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 0.5rem;
+            min-width: 200px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            // &:nth-child(odd) {
+            //   &.agendado {
+            //     background-color: $sunriseYellow6;
+            //   }
+            // }
+            &.warning,
+            &.canceled {
+              background-color: $dustRed7;
+              .appointment-actions {
+                #edit,
+                #end-appointment {
+                  color: $neutral1;
+                  &:hover {
+                    color: $neutral7;
+                  }
+                }
+              }
+              .doctor-info,
+              .patient-info {
+                span {
+                  color: $neutral2;
+                }
+                &:hover {
+                  span {
+                    color: $neutral7;
+                  }
+                }
+              }
+            }
+
+            &.agendado {
+              background-color: $sunriseYellow6;
+              .appointment-actions {
+                #edit,
+                #end-appointment {
+                  color: $neutral12;
+                  &:hover {
+                    color: $neutral7;
+                  }
+                }
+              }
+              .doctor-info,
+              .patient-info {
+                &:hover {
+                  span {
+                    color: $neutral7;
+                  }
+                }
+              }
+            }
+
+            &.past {
+              background-color: $polarGreen6;
+
+              .doctor-info,
+              .patient-info {
+                span {
+                  color: $neutral2;
+                }
+
+                &:hover {
+                  span {
+                    color: $neutral7;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     .appointment {
       height: 100%;
-      border-radius: 8px;
       color: white;
       padding: 0.5rem 1rem;
       display: flex;
@@ -71,43 +155,6 @@
         }
       }
       // background-color: #0aaf60;
-      &.agendado {
-        background-color: $sunriseYellow6;
-        .appointment-actions {
-          #edit,
-          #end-appointment {
-            color: $neutral12;
-            &:hover {
-              color: $neutral7;
-            }
-          }
-        }
-        .doctor-info,
-        .patient-info {
-          &:hover {
-            span {
-              color: $neutral7;
-            }
-          }
-        }
-      }
-
-      &.past {
-        background-color: $polarGreen6;
-
-        .doctor-info,
-        .patient-info {
-          span {
-            color: $neutral2;
-          }
-
-          &:hover {
-            span {
-              color: $neutral7;
-            }
-          }
-        }
-      }
     }
   }
 

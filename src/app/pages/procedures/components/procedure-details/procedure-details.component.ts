@@ -17,6 +17,7 @@ import { ProcedureService } from '../../services/procedure.service';
 import { DataMode } from '@app/shared/helpers/datamode.helper';
 import { Procedure } from '@app/shared/interfaces/procedure.interface';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
+import { TextAreaComponent } from '@app/shared/components/forms/text-area/text-area.component';
 
 @Component({
   selector: 'app-procedure-details',
@@ -27,6 +28,7 @@ import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-pan
     ButtonComponent,
     NgIf,
     BackSubmitPanelComponent,
+    TextAreaComponent,
   ],
   templateUrl: './procedure-details.component.html',
   styleUrl: './procedure-details.component.scss',
@@ -53,7 +55,7 @@ export class ProcedureDetailsComponent {
       name: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      steps: new FormControl({ value: null, disabled: false }, [
+      description: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
       member: new FormControl({ value: null, disabled: false }, [
@@ -74,12 +76,14 @@ export class ProcedureDetailsComponent {
   submit() {
     const procedure = this.formGroup.getRawValue();
     if (procedure.id === null) {
-      this.procedureService.add(procedure);
+      this.procedureService
+        .add(procedure)
+        .subscribe(() => this.router.navigate(['/procedures']));
     } else {
-      this.procedureService.update(procedure);
+      this.procedureService
+        .update(procedure)
+        .subscribe(() => this.router.navigate(['/procedures']));
     }
-
-    this.router.navigate(['/procedures']);
   }
 
   back() {

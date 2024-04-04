@@ -1,6 +1,29 @@
 <form nz-form [formGroup]="formGroup" nz-row [nzGutter]="16">
   <div class="gutter-row mb-3" nz-col [nzSpan]="24">
-    <h2>Agendamentos</h2>
+    <div class="header" nz-row [nzGutter]="16">
+      <div
+        class="gutter-row mb-3"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 12 }"
+      >
+        <h2>Agendamentos</h2>
+      </div>
+      <div
+        *ngIf="mode !== 'create'"
+        class="cancel-button"
+        nz-col
+        [nzXs]="{ span: 24 }"
+        [nzLg]="{ span: 12 }"
+      >
+        <app-button
+          label="Cancelar"
+          type="secondary"
+          (click)="cancelScheduling()"
+        ></app-button>
+      </div>
+    </div>
+
     <div nz-row [nzGutter]="16">
       <div nz-col nzSpan="24">
         <app-input
@@ -20,7 +43,7 @@
             [nzLg]="{ span: 12 }"
           >
             <app-select
-              controlName="patient"
+              controlName="patientId"
               [parentForm]="formGroup"
               [placeholder]="'Paciente'"
               [hasFloatingLabel]="false"
@@ -33,17 +56,46 @@
           </div>
 
           <div
+            *ngIf="schedulingTypeList$ | async as schedulingType"
+            nz-col
+            [nzXs]="{ span: 24 }"
+            [nzLg]="{ span: 12 }"
+          >
+            <app-select
+              [placeholder]="'Tipo de agendamento'"
+              controlName="schedulingTypeId"
+              [parentForm]="formGroup"
+              [hasFloatingLabel]="false"
+              [options]="schedulingType"
+            ></app-select>
+          </div>
+
+          <!-- <div
             *ngIf="physioterapistList$ | async as physioterapist"
             nz-col
             [nzXs]="{ span: 24 }"
             [nzLg]="{ span: 12 }"
           >
             <app-select
-              controlName="doctor"
+              controlName="professionalId"
               [parentForm]="formGroup"
               [placeholder]="'Profissional do atendimento'"
               [hasFloatingLabel]="false"
               [options]="physioterapist"
+            ></app-select>
+          </div> -->
+          <div
+            *ngIf="schedulingStatusList$ | async as schedulingStatus"
+            nz-col
+            [nzXs]="{ span: 24 }"
+            [nzLg]="{ span: 12 }"
+          >
+            <app-select
+              [placeholder]="'Status'"
+              controlName="schedulingStatusId"
+              [parentForm]="formGroup"
+              [hasFloatingLabel]="false"
+              [options]="schedulingStatus"
             ></app-select>
           </div>
         </div>

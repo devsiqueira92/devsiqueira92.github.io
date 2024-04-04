@@ -25,13 +25,13 @@ import { TextAreaComponent } from '@app/shared/components/forms/text-area/text-a
 import { PhysioterapistService } from '@app/pages/physioterapists/services/physioterapist.service';
 import { PatientService } from '@app/pages/patients/services/patient.service';
 import { SelectComponent } from '@app/shared/components/forms/select/select.component';
-import { SwitchComponent } from '@app/shared/components/forms/switch/switch.component';
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
 import { TimePickerComponent } from '@app/shared/components/forms/time-picker/time-picker.component';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AppointmentDateService } from '@app/shared/services/appointment-date.service';
 import { LinkButtonComponent } from '@app/shared/components/link-button/link-button.component';
+import { SchedulingTypeService } from '@app/shared/services/scheduling-type.service';
 
 @Component({
   standalone: true,
@@ -45,7 +45,6 @@ import { LinkButtonComponent } from '@app/shared/components/link-button/link-but
     NzDrawerModule,
     TextAreaComponent,
     SelectComponent,
-    SwitchComponent,
     DatePickerComponent,
     TimePickerComponent,
     BackSubmitPanelComponent,
@@ -60,7 +59,10 @@ export class SchedulingDetailComponent {
   formGroup: FormGroup<SchedulingForm>;
   procedureList$: Observable<any>;
   patientList$: Observable<any>;
+  schedulingTypeList$: Observable<any>;
   physioterapistList$: Observable<any>;
+  schedulingStatusList$: Observable<any>;
+
   visible = false;
   isSchedulingFinished = false;
   constructor(
@@ -69,6 +71,7 @@ export class SchedulingDetailComponent {
     private proceduresService: ProcedureService,
     private patientService: PatientService,
     private physioterapistService: PhysioterapistService,
+    private schedulingTypeService: SchedulingTypeService,
     private router: Router,
     private dateService: AppointmentDateService
   ) {}
@@ -85,6 +88,26 @@ export class SchedulingDetailComponent {
       )
     );
 
+    this.schedulingTypeList$ = this.schedulingTypeService.getList().pipe(
+      map((r: any) =>
+        r.map((element: any) => ({
+          label: element.typeName,
+          value: element.id,
+        }))
+      )
+    );
+
+    this.schedulingStatusList$ = this.schedulingTypeService
+      .getStatusList()
+      .pipe(
+        map((r: any) =>
+          r.map((element: any) => ({
+            label: element.name,
+            value: element.id,
+          }))
+        )
+      );
+
     this.physioterapistList$ = this.physioterapistService.getList().pipe(
       map((r: any) =>
         r.map((element: any) => ({
@@ -96,7 +119,7 @@ export class SchedulingDetailComponent {
 
     const formData = this.route.snapshot.data.formData as SchedulingFormOutput;
     this.mode = this.route.snapshot.data.mode;
-
+    console.log(formData);
     this.formGroup = new FormGroup<SchedulingForm>({
       id: new FormControl({
         value: null,
@@ -106,16 +129,26 @@ export class SchedulingDetailComponent {
         { value: null, disabled: this.mode !== DataMode.edit },
         Validators.required
       ),
-      time: new FormControl({
-        value: null,
-        disabled: this.mode !== DataMode.edit,
-      }),
-      patient: new FormControl(
+      // time: new FormControl({
+      //   value: null,
+      //   disabled: this.mode !== DataMode.edit,
+      // }),
+      patientId: new FormControl(
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
       ),
 
-      doctor: new FormControl(
+      professionalId: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+
+      schedulingTypeId: new FormControl(
+        { value: null, disabled: this.mode === DataMode.view },
+        Validators.required
+      ),
+
+      schedulingStatusId: new FormControl(
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
       ),
@@ -135,18 +168,49 @@ export class SchedulingDetailComponent {
   }
 
   editAppointment() {
+    debugger;
     let scheduling = this.formGroup.getRawValue();
-
-    if (scheduling.id === null) {
-      this.schedulingService.add(scheduling);
-    } else {
-      this.schedulingService.update(scheduling);
+    let date: any = scheduling.date;
+    if (typeof scheduling.date === 'string') {
+      date = new Date(date);
     }
 
-    this.router.navigate(['/scheduling']);
+    const formDate: any = date?.toISOString();
+    const dropdownTime: any = date?.getHours();
+
+    let myTime = formDate.split('T')[0];
+
+    if (dropdownTime >= 10) {
+      myTime += `T${dropdownTime}:00:00.000Z`;
+    }
+
+    if (dropdownTime < 10) {
+      myTime += `T0${dropdownTime}:00:00.000Z`;
+    }
+
+    scheduling.date = myTime;
+
+    if (scheduling.id === null) {
+      this.schedulingService
+        .add(scheduling)
+        .subscribe(() => this.router.navigate(['/scheduling']));
+    } else {
+      this.schedulingService
+        .update(scheduling)
+        .subscribe(() => this.router.navigate(['/scheduling']));
+    }
   }
 
   back() {
     this.router.navigate(['scheduling']);
+  }
+
+  cancelScheduling() {
+    this.schedulingService
+      .finishScheduling({
+        id: this.formGroup.controls.id?.value,
+        schedulingStatus: 1,
+      })
+      .subscribe(() => this.router.navigate(['scheduling']));
   }
 }

@@ -3,14 +3,16 @@ import { BehaviorSubject, map, tap } from 'rxjs';
 import { UserService } from './user.service';
 import { autoBind } from '../helpers/autobind.decorator';
 import { SubSink } from 'subsink';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Login } from '../interfaces/login.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
+import { Token } from '../interfaces/token.interface';
 
 /* eslint-enable */
 const TOKEN_KEY = 'authorization';
 const TOKEN_RENEW_DELAY_OFFSET = 5000; // 5 sec
 
-function tokenGetter(): string {
+export function tokenGetter(): string {
   return sessionStorage.getItem(TOKEN_KEY) as string;
 }
 
@@ -20,10 +22,13 @@ function tokenGetter(): string {
 export class AuthenticationService {
   authenticated$ = new BehaviorSubject<boolean | null>(null);
   // token$ = new BehaviorSubject<Token | null>(null);
-  token$ = new BehaviorSubject<string | null>(null);
+  token$ = new BehaviorSubject<Token | null>(null);
   private subs = new SubSink();
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private jwtHelper: JwtHelperService
+  ) {
     if (this.isAuthenticated) {
       this.fetchUserInfo();
       // this.subs.sink = this.setupTokenRenewalSubscription(tokenGetter());
@@ -77,10 +82,9 @@ export class AuthenticationService {
   }
 
   // private decodeToken(token: string): Token | null {
-  private decodeToken(token: string): string | null {
+  private decodeToken(token: string): Token | null {
     if (token) {
-      // return this.jwtHelper.decodeToken(token);
-      return token;
+      return this.jwtHelper.decodeToken(token);
     }
     return null;
   }
@@ -88,16 +92,7 @@ export class AuthenticationService {
   get isAuthenticated(): boolean {
     const token = tokenGetter();
     if (token) {
-      // return !this.jwtHelper.isTokenExpired(token);
-      return true;
-    }
-    return false;
-  }
-
-  getRole(role: string[]): boolean {
-    const token = tokenGetter();
-    if (token) {
-      return role.includes(token);
+      return !this.jwtHelper.isTokenExpired(token);
     }
     return false;
   }

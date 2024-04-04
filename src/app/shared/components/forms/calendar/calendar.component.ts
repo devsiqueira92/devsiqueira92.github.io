@@ -5,6 +5,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { Router } from '@angular/router';
 import { PopoverComponent } from '../../popover/popover.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -15,63 +16,62 @@ import { PopoverComponent } from '../../popover/popover.component';
     CommonModule,
     NzPopoverModule,
     PopoverComponent,
+    FormsModule,
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent implements OnInit {
   @Input() events: any;
+  eventArr = [];
   @Output() selectDate = new EventEmitter<any>();
-
+  date = new Date();
   selectedYear: number;
   noSchedulingAvailable = false;
 
   constructor(private router: Router) {}
   ngOnInit(): void {}
 
-  displayEvent(eventDay: any, date: any) {
-    return (
-      eventDay.date.getDate() === date.getDate() &&
-      eventDay.date.getMonth() === date.getMonth() &&
-      eventDay.date.getYear() === date.getYear()
-    );
-  }
+  // displayEvent(eventDay: any, date: any) {
+  //   return (
+  //     eventDay.date.getDate() === date.getDate() &&
+  //     eventDay.date.getMonth() === date.getMonth() &&
+  //     eventDay.date.getYear() === date.getYear()
+  //   );
+  // }
 
-  getEvents(index: any, event: any) {
-    return event;
-  }
+  // getEvents(index: any, event: any) {
+  //   return event;
+  // }
 
-  getMonthEvents(month: Date) {
-    return this.events.filter((value: any) => {
-      return (
-        value.date.getMonth() === month.getMonth() &&
-        value.date.getFullYear() === this.selectedYear
-      );
-    });
-  }
-
-  panelChange(change: { date: Date; mode: string }): void {
-    this.selectedYear = change.date.getFullYear();
-  }
+  // getMonthEvents(month: Date) {
+  //   return this.events.filter((value: any) => {
+  //     return (
+  //       value.date.getMonth() === month.getMonth() &&
+  //       value.date.getFullYear() === this.selectedYear
+  //     );
+  //   });
+  // }
 
   selectChange(event: any): void {
     this.selectedYear = event.getFullYear();
-    const hasAvailability =
-      this.events.filter(
-        (ev: any) =>
-          new Date(ev.date).toISOString().substring(0, 10) ===
-          new Date(event).toISOString().substring(0, 10)
-      ).length < 2;
 
+    // const hasAvailability =
+    //   this.events.filter(
+    //     (ev: any) =>
+    //       new Date(ev.date).toISOString().substring(0, 10) ===
+    //       new Date(event).toISOString().substring(0, 10)
+    //   ).length < 2;
+    console.log(event);
     this.selectDate.emit({
       date: event,
-      hasSchedulingAvailable: hasAvailability,
+      hasSchedulingAvailable: true,
     });
   }
 
-  edit(event: any) {
-    this.router.navigate(['/scheduling/edit', event.id]);
-  }
+  // edit(event: any) {
+  //   this.router.navigate(['/scheduling/edit', event.id]);
+  // }
 
   hasEvent(date: any) {
     const events = this.events.filter(

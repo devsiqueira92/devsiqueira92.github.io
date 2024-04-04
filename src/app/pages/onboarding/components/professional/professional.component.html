@@ -1,0 +1,43 @@
+<section>
+  <header>
+    <h3>Dados do profissional</h3>
+  </header>
+
+  <form nz-form [formGroup]="formGroup">
+    <app-input
+      [placeholder]="'Name'"
+      controlName="name"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+
+    <app-input
+      [placeholder]="'Número de registro'"
+      controlName="registerNumber"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+
+    <app-input
+      [placeholder]="'Valor da consulta'"
+      controlName="appointmentValue"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-input>
+
+    <app-date-picker
+      [placeholder]="'Data de nascimento'"
+      controlName="birthDate"
+      [parentForm]="formGroup"
+      type="text"
+    ></app-date-picker>
+
+    <app-back-submit-panel
+      (submit)="submit()"
+      (back)="back()"
+      [disabled]="
+        !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+      "
+    ></app-back-submit-panel>
+  </form>
+</section>

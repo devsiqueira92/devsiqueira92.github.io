@@ -21,12 +21,11 @@
     type="text"
   ></app-input>
 
-  <app-input
+  <app-text-area
     [placeholder]="'Passo'"
-    controlName="steps"
+    controlName="description"
     [parentForm]="formGroup"
-    type="text"
-  ></app-input>
+  ></app-text-area>
 
   <app-back-submit-panel
     (submit)="submit()"

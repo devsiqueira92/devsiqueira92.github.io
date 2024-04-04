@@ -1,0 +1,13 @@
+<section>
+  <header>
+    <h2>Paciente</h2>
+  </header>
+
+  <form [formGroup]="formGroup">
+    <app-input controlName="id" [parentForm]="formGroup"></app-input>
+    <app-button icon="search" (click)="search()"></app-button>
+  </form>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</section>

@@ -8,7 +8,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { CommonModule } from '@angular/common';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { ProcedureService } from '@app/pages/procedures/services/procedure.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { TextAreaComponent } from '@app/shared/components/forms/text-area/text-area.component';
@@ -65,7 +65,7 @@ export class MedicalAppointmentDetailsComponent {
   ngOnInit(): void {
     const formData = this.route.snapshot.data
       .formData as MedicalAppointmentFormOutput;
-    console.log(formData);
+
     const schedulingId = this.route.snapshot.paramMap.get('id') as string;
 
     this.procedureList$ = this.proceduresService.getList();
@@ -79,12 +79,35 @@ export class MedicalAppointmentDetailsComponent {
         disabled: this.mode === DataMode.edit,
       }),
 
-      bloodOxygenation: new FormControl(null),
-      bloodPressure: new FormControl(null),
-      bpm: new FormControl(null),
-      details: new FormControl(null),
-      evolution: new FormControl(null),
-      status: new FormControl(null),
+      bloodOxygenation: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      bloodPressure: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      beatsPerMinute: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      notes: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      evolution: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      weight: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      status: new FormControl({
+        value: null,
+        disabled: this.mode === DataMode.view,
+      }),
+      schedulingId: new FormControl(schedulingId),
     });
 
     if (formData.mode === DataMode.view || formData.mode === DataMode.edit) {
@@ -99,13 +122,23 @@ export class MedicalAppointmentDetailsComponent {
 
   submit() {
     let medicalAppointment = this.formGroup.getRawValue();
+    debugger;
     if (medicalAppointment.id === null) {
-      this.medicalAppointmentService.add(medicalAppointment);
+      this.medicalAppointmentService
+        .add(medicalAppointment)
+        .pipe(
+          switchMap(() =>
+            this.schedulingService.finishScheduling(
+              medicalAppointment.schedulingId
+            )
+          )
+        )
+        .subscribe(() => this.router.navigate(['/medical-appointments']));
     } else {
-      this.medicalAppointmentService.update(medicalAppointment);
+      this.medicalAppointmentService
+        .update(medicalAppointment)
+        .subscribe(() => this.router.navigate(['/medical-appointments']));
     }
-
-    this.router.navigate(['/medical-appointments']);
   }
 
   open(): void {
@@ -121,11 +154,11 @@ export class MedicalAppointmentDetailsComponent {
 
     if (previousSteps) {
       this.formGroup.patchValue({
-        evolution: `${previousSteps} \n${protocol.steps}`,
+        evolution: `${previousSteps} \n${protocol.description}`,
       });
     } else {
       this.formGroup.patchValue({
-        evolution: `${protocol.steps}`,
+        evolution: `${protocol.description}`,
       });
     }
 

@@ -9,6 +9,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { DrawerService } from '@app/shared/services/drawer.service';
+import { MedicalAppointmentService } from '@app/pages/medical-appointments/services/medical-appointment.service';
+import { NzTableModule } from 'ng-zorro-antd/table';
 @Component({
   standalone: true,
   imports: [
@@ -19,6 +21,7 @@ import { DrawerService } from '@app/shared/services/drawer.service';
     RouterModule,
     NzGridModule,
     NzDrawerModule,
+    NzTableModule,
   ],
   templateUrl: './patient-history.component.html',
   styleUrl: './patient-history.component.scss',
@@ -31,6 +34,7 @@ export class PatientHistoryComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private patientService: PatientService,
+    private medicalAppointmentService: MedicalAppointmentService,
 
     public drawerService: DrawerService
   ) {}
@@ -38,7 +42,7 @@ export class PatientHistoryComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
 
-    this.history$ = this.patientService.getScheduling(id);
+    this.history$ = this.medicalAppointmentService.getPatientHistoricList(id);
   }
 
   open(): void {

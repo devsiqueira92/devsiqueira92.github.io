@@ -1,42 +1,43 @@
 <form nz-form [formGroup]="formGroup" nz-row [nzGutter]="16">
   <div class="gutter-row" nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 12 }">
     <app-input
-      [placeholder]="'Clínica'"
-      controlName="name"
+      [placeholder]="'Email'"
+      controlName="email"
       [parentForm]="formGroup"
       type="text"
     ></app-input>
 
     <app-input
-      [placeholder]="'Endereço'"
-      controlName="address"
+      [placeholder]="'Senha'"
+      controlName="password"
       [parentForm]="formGroup"
-      type="text"
+      type="password"
     ></app-input>
 
     <app-input
-      [placeholder]="'Telefone'"
-      controlName="phone"
+      [placeholder]="'Confirme a senha'"
+      controlName="confirmPassword"
       [parentForm]="formGroup"
-      type="text"
+      type="password"
     ></app-input>
 
-    <app-input
-      [placeholder]="'CNPJ'"
-      controlName="identificationNumber"
+    <app-select
+      placeholder="Tipo da conta"
+      controlName="accountType"
       [parentForm]="formGroup"
-      type="text"
-    ></app-input>
+      [options]="accountType$"
+    >
+    </app-select>
   </div>
 
-  <div
+  <!-- <div
     class="gutter-row uploader-wrapper"
     nz-col
     [nzXs]="{ span: 24 }"
     [nzLg]="{ span: 12 }"
   >
     <app-upload class="uploader"></app-upload>
-  </div>
+  </div> -->
 
   <div nz-col nzSpan="24" class="cta">
     <app-link-button label="Register" (click)="register()"></app-link-button>

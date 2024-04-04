@@ -11,22 +11,31 @@ export const PATIENTS_ROUTES: Routes = [
     path: '',
     component: PatientsComponent,
   },
+
+  // {
+  //   path: 'search',
+  //   component: SearchComponent,
+  //   children: [
+  //     {
+  //       path: 'result',
+  //       component: SearchResultComponent,
+  //     },
+  //   ],
+  // },
   {
     path: 'edit/:id',
     component: PatientDetailsComponent,
     resolve: { formData: PatientResolver },
     data: { mode: DataMode.edit },
   },
-
   {
     path: 'create',
     component: PatientDetailsComponent,
     resolve: { formData: PatientResolver },
     data: { mode: DataMode.create },
   },
-
   {
-    path: ':id/history',
+    path: 'history/:id',
     component: PatientHistoryComponent,
     children: [{ path: 'detail/:id', component: HistoryDetailComponent }],
   },

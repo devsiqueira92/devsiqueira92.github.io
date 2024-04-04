@@ -1,11 +1,11 @@
-import { FormControl } from "@angular/forms";
-import { FormIsSubmiting } from "@app/shared/helpers/form.helper";
-
+import { FormControl } from '@angular/forms';
+import { FormIsSubmiting } from '@app/shared/helpers/form.helper';
+//string email, string password, string confirmPassword, short loginType
 interface RegisterForm extends FormIsSubmiting {
-    name?: FormControl<string | null>;
-    address?: FormControl<string | null>;
-    phone?: FormControl<string | null>;
-    identificationNumber?: FormControl<string | null>;
+  email?: FormControl<string | null>;
+  password?: FormControl<string | null>;
+  confirmPassword?: FormControl<string | null>;
+  accountType?: FormControl<string | null>;
 }
 
-export { RegisterForm }
+export { RegisterForm };

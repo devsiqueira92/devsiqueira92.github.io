@@ -2,12 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ButtonComponent } from '../button/button.component';
-import { BackButtonDirective } from '@app/shared/directives/back-button.directive';
 
 @Component({
   selector: 'app-back-submit-panel',
   standalone: true,
-  imports: [NzFormModule, NzButtonModule, ButtonComponent, BackButtonDirective],
+  imports: [NzFormModule, NzButtonModule, ButtonComponent],
   templateUrl: './back-submit-panel.component.html',
   styleUrl: './back-submit-panel.component.scss',
 })

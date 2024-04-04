@@ -1,22 +1,8 @@
-Fluxo:
-Registrar minha clinica
-Após registo da clinica, criar um fisioterapeuta para atender os pacientes;
+Novo fluxo:
+  Ao fazer criar nova conta, sou redirecionado para OnBoarading page, para preencher o forumalario de acordo com o tipo de conta (Clinic/Professional).
+  Depois disto, a conta passa a ser uma conta registrada (IsRegistred).
+  Se conta não for registrada, toda navegação (Paciente, Professioanl, MyAccount, Agendamento, Consultas e Procedimentos) deve redirecionar para OnBoarading, de acordo com a conta
 
-Criar procedimentos de sessao
-Cada agendamento vai ter uma data, um paciente, um fisioterapeuta e um tipo de procedimento
-
-Programar o upload button
+Para editar informações da Clinica/Profissional, ir para MyAccount
 
 
-criar uma página de login e ao aceder a aplicação, abri-la inicialmente se não estiver autenticado.
-Caso autenticado, ir pra agendamentos
-
-
-Historico do paciente
-Buscar todas as consultas do paciente 1 e os procedimentos realizados
-
-nomear procedimento para protocolo ***
-
-
-criar tabela consulta, onde irá conter bpm, pressao arterial, evolução do paciente, entre outras
-consulta deve armazenar o id do agendamento, o id do paciente

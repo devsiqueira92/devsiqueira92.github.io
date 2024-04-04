@@ -9,6 +9,11 @@ import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShowIfLoggedDirective } from './shared/directives/show-if-authorized.directive';
+import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { tokenGetter } from './shared/services/authentication.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccessControlDirective } from './shared/directives/access-control.directive';
+import { RolesEnum } from './shared/enums/roles.enum';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +31,7 @@ import { ShowIfLoggedDirective } from './shared/directives/show-if-authorized.di
     NzIconModule,
     ReactiveFormsModule,
     ShowIfLoggedDirective,
+    AccessControlDirective,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -34,6 +40,7 @@ export class AppComponent implements OnInit {
   isCollapsed = false;
   collapsedSize: string;
   uncollapsedSize: string;
+  roles = RolesEnum;
 
   isMobile = window.innerWidth < 720;
 

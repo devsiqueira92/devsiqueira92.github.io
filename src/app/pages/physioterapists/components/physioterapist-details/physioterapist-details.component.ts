@@ -18,6 +18,7 @@ import { Physioterapist } from '@app/shared/interfaces/physioterapist.interface'
 import { PhysioterapistService } from '../../services/physioterapist.service';
 import { BackSubmitPanelComponent } from '@app/shared/components/back-submit-panel/back-submit-panel.component';
 import { DatePickerComponent } from '@app/shared/components/forms/date-picker/date-picker.component';
+import { ClinicProfessionalService } from '@app/shared/services/clinic-professional.service';
 
 @Component({
   standalone: true,
@@ -38,7 +39,8 @@ export class PhysioterapistDetailsComponent {
   constructor(
     public route: ActivatedRoute,
     private physioterapistService: PhysioterapistService,
-    private router: Router
+    private router: Router,
+    private clinicProfessionalService: ClinicProfessionalService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,18 @@ export class PhysioterapistDetailsComponent {
       name: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
-      birthDate: new FormControl({ value: null, disabled: false }, [
+
+      contact: new FormControl({ value: null, disabled: false }, [
+        Validators.required,
+      ]),
+
+      birthDate: new FormControl({ value: null, disabled: false }),
+
+      registerNumber: new FormControl({ value: null, disabled: false }, [
+        Validators.required,
+      ]),
+
+      appointmentValue: new FormControl({ value: null, disabled: false }, [
         Validators.required,
       ]),
     });
@@ -71,14 +84,21 @@ export class PhysioterapistDetailsComponent {
   }
 
   submit() {
-    const physioterapist = this.formGroup.getRawValue();
-    if (physioterapist.id === null) {
-      this.physioterapistService.add(physioterapist);
-    } else {
-      this.physioterapistService.update(physioterapist);
-    }
+    const professional = this.formGroup.getRawValue();
+    const stringDate: any = professional.birthDate;
+    professional.birthDate = new Date(stringDate)
+      .toISOString()
+      .substring(0, 10);
 
-    this.router.navigate(['/physioterapists']);
+    if (professional.id === null) {
+      this.clinicProfessionalService
+        .add(professional)
+        .subscribe(() => this.router.navigate(['/physioterapists']));
+    } else {
+      this.physioterapistService
+        .update(professional)
+        .subscribe(() => this.router.navigate(['/physioterapists']));
+    }
   }
 
   back() {

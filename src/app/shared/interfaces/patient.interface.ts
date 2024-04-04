@@ -2,7 +2,7 @@ import { BaseEntity } from './base-entity.interface';
 
 export interface Patient extends BaseEntity {
   name: string;
-  phone: string;
+  contact: string;
   address: string;
   birthDate: Date;
 }

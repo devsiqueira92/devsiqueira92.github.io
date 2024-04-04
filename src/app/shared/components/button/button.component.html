@@ -1,4 +1,4 @@
 <button nz-button [nzType]="type" [disabled]="disabled">
   <span *ngIf="icon" nz-icon [nzType]="icon"></span>
-  {{ label }}
+  <span *ngIf="label">{{ label }}</span>
 </button>

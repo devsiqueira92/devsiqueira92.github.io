@@ -18,10 +18,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.scheduling.patient.name }}</td>
-        <td>{{ data.scheduling.doctor.name }}</td>
-        <td>{{ data.scheduling.date | date : "dd/MM/yyyy" }}</td>
-        <td>{{ data.scheduling.status.name }}</td>
+        <td>{{ data.patientName }}</td>
+        <td>{{ data.professionalName }}</td>
+        <td>{{ data.date | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.evolution }}</td>
 
         <td class="actions">
           <span
@@ -29,7 +29,7 @@
             nzType="edit"
             nzTheme="outline"
             class="edit"
-            [routerLink]="'edit/' + data.id"
+            [routerLink]="'edit/' + data.schedulingId"
           ></span>
           <nz-divider nzType="vertical"></nz-divider>
           <span class="delete" nz-icon nzType="delete" nzTheme="outline"></span>

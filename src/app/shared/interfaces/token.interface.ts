@@ -3,6 +3,7 @@ export interface Token {
   ut: string; //
   cid: string; // Client Account id
   un: string; // UserName
+  accType: string;
   eupk: string; //
   mfa: boolean; // Multi Factor Authentication activated
   ra: number; //

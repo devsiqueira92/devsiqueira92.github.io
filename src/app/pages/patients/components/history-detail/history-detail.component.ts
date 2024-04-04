@@ -8,7 +8,6 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { LoadingComponent } from '@app/shared/components/loading/loading.component';
 import { DrawerService } from '@app/shared/services/drawer.service';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { BackButtonDirective } from '@app/shared/directives/back-button.directive';
 
 @Component({
   standalone: true,
@@ -17,7 +16,6 @@ import { BackButtonDirective } from '@app/shared/directives/back-button.directiv
     NzDescriptionsModule,
     ButtonComponent,
     LoadingComponent,
-    BackButtonDirective,
   ],
   templateUrl: './history-detail.component.html',
   styleUrl: './history-detail.component.scss',

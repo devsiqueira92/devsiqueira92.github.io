@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable, delay, map, tap } from 'rxjs';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable, map } from 'rxjs';
 import { SchedulingService } from '../../services/scheduling.service';
 import { CommonModule } from '@angular/common';
-import { LinkButtonComponent } from '@app/shared/components/link-button/link-button.component';
-import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
-import { AccessControlDirective } from '@app/shared/directives/access-control.directive';
 import { AddAppointmentButtonComponent } from '@app/shared/components/add-appointment-button/add-appointment-button.component';
 import { LoadingComponent } from '@app/shared/components/loading/loading.component';
 
@@ -16,12 +13,9 @@ import { LoadingComponent } from '@app/shared/components/loading/loading.compone
   standalone: true,
   imports: [
     CommonModule,
-    LinkButtonComponent,
-    NzCardModule,
     NzIconModule,
     NzGridModule,
     RouterModule,
-    AccessControlDirective,
     AddAppointmentButtonComponent,
     LoadingComponent,
   ],
@@ -30,27 +24,28 @@ import { LoadingComponent } from '@app/shared/components/loading/loading.compone
 })
 export class SchedulingListComponent implements OnInit {
   list$: Observable<any>;
-
   eventosPorHora$: Observable<{ [hora: number]: any }>;
+
   horas: any[] = [];
   horaInicial = 7;
   horaFinal = 19;
   currentDate = new Date();
 
+  enableAddingButton = false;
+
   constructor(
     public route: ActivatedRoute,
-    private schedulingService: SchedulingService,
-    private router: Router
+    private schedulingService: SchedulingService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((param) => {
       // this.list$ = this.schedulingService.getByDate(param.date);
+      this.enableAddingButton = new Date(param.date) > this.currentDate;
 
-      this.eventosPorHora$ = this.schedulingService.getByDate(param.date).pipe(
-        map((agendamentos) => this.mapearEventosPorHora(agendamentos)),
-        delay(1000)
-      );
+      this.eventosPorHora$ = this.schedulingService
+        .getByDate(param.date)
+        .pipe(map((agendamentos) => this.mapearEventosPorHora(agendamentos)));
     });
     this.criarDivsParaHoras();
   }
@@ -64,9 +59,34 @@ export class SchedulingListComponent implements OnInit {
   private mapearEventosPorHora(agendamentos: any[]): { [hora: number]: any } {
     const eventosPorHora: { [hora: number]: any } = {};
     for (const agendamento of agendamentos) {
-      const hora = agendamento.date.getHours();
+      const hora = new Date(agendamento.date).getHours();
       eventosPorHora[hora] = agendamento;
     }
     return eventosPorHora;
+  }
+
+  dateCompare(date: string) {
+    const toDate = new Date(date);
+    console.log(toDate.getTime(), this.currentDate.getTime());
+    return toDate.getDate() > this.currentDate.getDate();
+  }
+
+  getAppointmentClass(status: string, date: any) {
+    if (status === 'Agendado' && this.dateCompare(date)) {
+      return 'agendado';
+    }
+
+    if (status === 'Agendado' && !this.dateCompare(date)) {
+      return 'warning';
+    }
+
+    if (status === 'Finalizado') {
+      return 'past';
+    }
+
+    if (status === 'Cancelado') {
+      return 'canceled';
+    }
+    return null;
   }
 }
