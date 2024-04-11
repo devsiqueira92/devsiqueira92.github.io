@@ -122,7 +122,6 @@ export class MedicalAppointmentDetailsComponent {
 
   submit() {
     let medicalAppointment = this.formGroup.getRawValue();
-    debugger;
     if (medicalAppointment.id === null) {
       this.medicalAppointmentService
         .add(medicalAppointment)

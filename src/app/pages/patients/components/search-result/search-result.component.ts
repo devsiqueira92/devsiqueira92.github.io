@@ -34,7 +34,6 @@ export class SearchResultComponent implements OnInit {
   }
 
   addToClinic(result: string) {
-    debugger;
     this.clinicPatientService.addExisting(result).subscribe();
   }
 }

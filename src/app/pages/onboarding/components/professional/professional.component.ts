@@ -53,7 +53,6 @@ export class ProfessionalComponent {
   }
 
   submit() {
-    debugger;
     this.professionalService
       .registerProfessional(this.formGroup.value as Professional)
       .subscribe((r) => {

@@ -12,7 +12,7 @@
 
 <div *ngIf="history$ | async as history">
   <h3>Histórico de consultas</h3>
-  {{ history[0] | json }}
+  <!-- {{ history[0] | json }} -->
   <div class="patient-info">
     <span nz-icon nzType="user" nzTheme="outline"></span>
     <h4>Paciente: {{ history[0].patientName }}</h4>

@@ -168,7 +168,6 @@ export class SchedulingDetailComponent {
   }
 
   editAppointment() {
-    debugger;
     let scheduling = this.formGroup.getRawValue();
     let date: any = scheduling.date;
     if (typeof scheduling.date === 'string') {

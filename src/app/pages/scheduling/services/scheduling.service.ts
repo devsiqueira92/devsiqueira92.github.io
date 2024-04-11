@@ -48,7 +48,6 @@ export class SchedulingService {
   }
 
   finishScheduling(scheduling: any) {
-    debugger;
     return this.httpClient.put<any>(
       `${this.rootUrl}/scheduling/finished-status/${scheduling}`,
       scheduling
