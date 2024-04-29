@@ -5,24 +5,39 @@
         <span>{{ hora }}:00</span>
       </div>
       <span class="has-appointment">
-        <ng-container
+        <!-- <ng-container
           *ngTemplateOutlet="
             hasAppointment;
             context: { $implicit: eventosPorHora[hora] || hora }
           "
         >
+        </ng-container> -->
+        <ng-container
+          *ngTemplateOutlet="
+            eventosPorHora[hora] ? hasAppointment : newAppointment;
+            context: { $implicit: eventosPorHora[hora] || hora }
+          "
+        >
         </ng-container>
       </span>
-      <span *ngIf="enableAddingButton">
+      <!-- <span *ngIf="enableAddingButton">
         <div class="new-appointment">
           <app-add-appointment-button
             [time]="hora"
           ></app-add-appointment-button>
         </div>
-      </span>
+      </span> -->
     </div>
   </div>
-
+  <ng-template #newAppointment let-evento>
+    <!-- evento === hora -->
+    <div class="new-appointment" *ngIf="enableAddingButton">
+      <!-- <div class="icon" (click)="newAppointment()">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </div> -->
+      <app-add-appointment-button [time]="evento"></app-add-appointment-button>
+    </div>
+  </ng-template>
   <ng-template #hasAppointment let-evento>
     <div class="appointment-list">
       <div
@@ -49,7 +64,7 @@
             <span
               id="edit"
               nz-icon
-              nzType="edit"
+              nzType="form"
               nzTheme="outline"
               [routerLink]="'/scheduling/edit/' + item.id"
             ></span>

@@ -10,7 +10,7 @@
         <h2>Agendamentos</h2>
       </div>
       <div
-        *ngIf="mode !== 'create'"
+        *ngIf="mode !== formMode.create"
         class="cancel-button"
         nz-col
         [nzXs]="{ span: 24 }"
@@ -27,7 +27,7 @@
     <div nz-row [nzGutter]="16">
       <div nz-col nzSpan="24">
         <app-input
-          *ngIf="mode === 'edit'"
+          *ngIf="mode === formMode.edit"
           [placeholder]="'Id'"
           controlName="id"
           [parentForm]="formGroup"
@@ -91,6 +91,7 @@
             [nzLg]="{ span: 12 }"
           >
             <app-select
+              *ngIf="mode !== formMode.create"
               [placeholder]="'Status'"
               controlName="schedulingStatusId"
               [parentForm]="formGroup"

@@ -56,6 +56,7 @@ import { SchedulingTypeService } from '@app/shared/services/scheduling-type.serv
 })
 export class SchedulingDetailComponent {
   mode: string;
+  formMode = DataMode;
   formGroup: FormGroup<SchedulingForm>;
   procedureList$: Observable<any>;
   patientList$: Observable<any>;
@@ -65,6 +66,7 @@ export class SchedulingDetailComponent {
 
   visible = false;
   isSchedulingFinished = false;
+
   constructor(
     public route: ActivatedRoute,
     private schedulingService: SchedulingService,
@@ -119,7 +121,7 @@ export class SchedulingDetailComponent {
 
     const formData = this.route.snapshot.data.formData as SchedulingFormOutput;
     this.mode = this.route.snapshot.data.mode;
-    console.log(formData);
+
     this.formGroup = new FormGroup<SchedulingForm>({
       id: new FormControl({
         value: null,
@@ -129,10 +131,7 @@ export class SchedulingDetailComponent {
         { value: null, disabled: this.mode !== DataMode.edit },
         Validators.required
       ),
-      // time: new FormControl({
-      //   value: null,
-      //   disabled: this.mode !== DataMode.edit,
-      // }),
+
       patientId: new FormControl(
         { value: null, disabled: this.mode === DataMode.view },
         Validators.required
@@ -149,7 +148,7 @@ export class SchedulingDetailComponent {
       ),
 
       schedulingStatusId: new FormControl(
-        { value: null, disabled: this.mode === DataMode.view },
+        { value: null, disabled: this.mode !== DataMode.edit },
         Validators.required
       ),
     });
@@ -169,25 +168,6 @@ export class SchedulingDetailComponent {
 
   editAppointment() {
     let scheduling = this.formGroup.getRawValue();
-    let date: any = scheduling.date;
-    if (typeof scheduling.date === 'string') {
-      date = new Date(date);
-    }
-
-    const formDate: any = date?.toISOString();
-    const dropdownTime: any = date?.getHours();
-
-    let myTime = formDate.split('T')[0];
-
-    if (dropdownTime >= 10) {
-      myTime += `T${dropdownTime}:00:00.000Z`;
-    }
-
-    if (dropdownTime < 10) {
-      myTime += `T0${dropdownTime}:00:00.000Z`;
-    }
-
-    scheduling.date = myTime;
 
     if (scheduling.id === null) {
       this.schedulingService

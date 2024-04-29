@@ -21,12 +21,11 @@
       border-bottom: 1px dashed $neutral4;
       // padding: 1rem;
       .clock {
-        min-width: 65px;
+        min-width: 55px;
         padding: 1.75rem 0.5rem;
         display: flex;
         align-items: center;
         span {
-          margin-right: 0.5rem;
           font-weight: 600;
         }
       }
@@ -123,15 +122,18 @@
     .appointment {
       height: 100%;
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       transition: 0.3s ease-in-out;
       .appointment-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
         span {
           cursor: pointer;
-          margin-right: 0.5rem;
           font-size: 1.25rem;
         }
       }
@@ -163,6 +165,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 1.5rem;
+    padding: 0 0.75rem;
   }
 }

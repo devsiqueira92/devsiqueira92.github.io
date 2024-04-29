@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://physioapi.azurewebsites.net/api',
+  baseUrl: 'https://localhost:7078/api',
 };
 
 /*

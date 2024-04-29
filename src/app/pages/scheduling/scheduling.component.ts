@@ -35,10 +35,6 @@ export class SchedulingComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshEvents();
-    // this.events$ = this.schedulingService.getList();
-
-    // const date = new Date().toISOString().substring(0, 10);
-    // this.router.navigate(['scheduling/list', date]);
   }
 
   getSchedulingOnSelectedDate(event: any) {

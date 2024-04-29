@@ -41,7 +41,9 @@ export class SchedulingListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((param) => {
       // this.list$ = this.schedulingService.getByDate(param.date);
-      this.enableAddingButton = new Date(param.date) > this.currentDate;
+      const dateToCompare = this.currentDate.toISOString().substring(0, 10);
+      this.enableAddingButton =
+        new Date(param.date).getTime() >= new Date(dateToCompare).getTime();
 
       this.eventosPorHora$ = this.schedulingService
         .getByDate(param.date)
@@ -67,7 +69,6 @@ export class SchedulingListComponent implements OnInit {
 
   dateCompare(date: string) {
     const toDate = new Date(date);
-    console.log(toDate.getTime(), this.currentDate.getTime());
     return toDate.getDate() > this.currentDate.getDate();
   }
 

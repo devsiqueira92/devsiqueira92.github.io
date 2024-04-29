@@ -20,8 +20,8 @@
     *nzDateFullCell="let date"
     class="events"
     [ngClass]="{
-      active: hasEvent(date).length > 0,
-      full: hasEvent(date).length > 0 && hasEvent(date).length > 3
+      active: hasEvent(date)?.length > 0,
+      full: hasEvent(date)?.length > 0 && hasEvent(date)?.length > 3
     }"
   >
     <span>{{ date.getDate() }}</span>

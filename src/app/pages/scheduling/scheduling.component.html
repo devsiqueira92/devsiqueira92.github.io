@@ -7,15 +7,9 @@
 
   <div nz-col [nzSpan]="24" style="overflow: hidden" class="scheduling-section">
     <div nz-row [nzGutter]="16">
-      <div
-        class="gutter-row"
-        nz-col
-        [nzXs]="{ span: 24 }"
-        [nzLg]="{ span: 8 }"
-        *ngIf="events$ | async as events; else loading"
-      >
+      <div class="gutter-row" nz-col [nzXs]="{ span: 24 }" [nzLg]="{ span: 8 }">
         <app-calendar
-          [events]="events"
+          [events]="events$ | async"
           (selectDate)="getSchedulingOnSelectedDate($event)"
         ></app-calendar>
       </div>
