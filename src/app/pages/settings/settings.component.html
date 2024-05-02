@@ -1,0 +1,23 @@
+<form nz-form [formGroup]="formGroup">
+  <app-time-picker
+    [placeholder]="'Inicio atendimento'"
+    controlName="startTime"
+    [parentForm]="formGroup"
+    [step]="10"
+  ></app-time-picker>
+
+  <app-time-picker
+    [placeholder]="'Fim atendimento'"
+    controlName="endTime"
+    [parentForm]="formGroup"
+    [step]="10"
+  ></app-time-picker>
+
+  <app-back-submit-panel
+    (submit)="submit()"
+    (back)="back()"
+    [disabled]="
+      !formGroup.valid || formGroup.controls.isSubmitting?.value === true
+    "
+  ></app-back-submit-panel>
+</form>

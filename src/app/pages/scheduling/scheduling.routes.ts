@@ -5,7 +5,7 @@ import { SchedulingListComponent } from './components/scheduling-list/scheduling
 import { DataMode } from '@app/shared/helpers/datamode.helper';
 import { SchedulingResolver } from './resolvers/scheduling.resolver';
 
-export const APPOINTMENTS_ROUTES: Routes = [
+export const SCHEDULINGS_ROUTES: Routes = [
   {
     path: '',
     component: SchedulingComponent,

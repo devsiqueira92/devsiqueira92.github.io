@@ -34,6 +34,7 @@ export class TimePickerComponent {
   @Input() hasFloatingLabel = true;
   @Input() forceShowFloatingLabel = false;
   @Input() nzMode = 'default';
+  @Input() step = 60;
 
   isSubmitting$: Observable<boolean>;
 

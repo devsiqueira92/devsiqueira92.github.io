@@ -43,7 +43,7 @@ export const routes: Routes = [
     data: { authDesiredValue: true, redirect: '/scheduling' },
     loadChildren: () =>
       import('./pages/scheduling/scheduling.routes').then(
-        (m) => m.APPOINTMENTS_ROUTES
+        (m) => m.SCHEDULINGS_ROUTES
       ),
   },
   {
@@ -65,6 +65,18 @@ export const routes: Routes = [
       import('./pages/procedures/procedures.routes').then(
         (m) => m.PROCEDURES_ROUTES
       ),
+  },
+
+  {
+    path: 'settings',
+    canActivate: [isAuthenticatedGuard, RoleGuard],
+    data: {
+      authDesiredValue: true,
+      redirect: '/scheduling',
+      roles: [RolesEnum.Professional, RolesEnum.Clinic],
+    },
+    loadChildren: () =>
+      import('./pages/settings/settings.routes').then((m) => m.SETTINGS_ROUTES),
   },
 
   {

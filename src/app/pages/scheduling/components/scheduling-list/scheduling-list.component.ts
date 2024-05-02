@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, merge, mergeAll, take } from 'rxjs';
 import { SchedulingService } from '../../services/scheduling.service';
 import { CommonModule } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -8,6 +8,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 
 import { AddAppointmentButtonComponent } from '@app/shared/components/add-appointment-button/add-appointment-button.component';
 import { LoadingComponent } from '@app/shared/components/loading/loading.component';
+import { SettingsService } from '@app/pages/settings/services/settings.service';
 
 @Component({
   standalone: true,
@@ -27,14 +28,15 @@ export class SchedulingListComponent implements OnInit {
   eventosPorHora$: Observable<{ [hora: number]: any }>;
 
   horas: any[] = [];
-  horaInicial = 7;
-  horaFinal = 19;
+  horaInicial = this.settingService.startTime;
+  horaFinal = this.settingService.endTime;
   currentDate = new Date();
 
   enableAddingButton = false;
 
   constructor(
     public route: ActivatedRoute,
+    private settingService: SettingsService,
     private schedulingService: SchedulingService
   ) {}
 
@@ -49,13 +51,15 @@ export class SchedulingListComponent implements OnInit {
         .getByDate(param.date)
         .pipe(map((agendamentos) => this.mapearEventosPorHora(agendamentos)));
     });
-    this.criarDivsParaHoras();
   }
 
   private criarDivsParaHoras() {
-    for (let i = this.horaInicial; i <= this.horaFinal; i++) {
-      this.horas.push(i);
-    }
+    merge(this.settingService.startTime$.pipe(map((s) => s))).subscribe((r) => {
+      console.log(r);
+      for (let i = r; i <= this.horaFinal; i++) {
+        this.horas.push(i);
+      }
+    });
   }
 
   private mapearEventosPorHora(agendamentos: any[]): { [hora: number]: any } {
@@ -64,6 +68,7 @@ export class SchedulingListComponent implements OnInit {
       const hora = new Date(agendamento.date).getHours();
       eventosPorHora[hora] = agendamento;
     }
+    this.criarDivsParaHoras();
     return eventosPorHora;
   }
 

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProceduresComponent } from './procedures.component';
 import { ProcedureDetailsComponent } from './components/procedure-details/procedure-details.component';
-import { ProcedureResolver } from './resolvers/patient.resolver';
+import { ProcedureResolver } from './resolvers/procedure.resolver';
 import { DataMode } from '@app/shared/helpers/datamode.helper';
 
 export const PROCEDURES_ROUTES: Routes = [
